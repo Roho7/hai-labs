@@ -1,0 +1,45 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hi", "Hello", "Hey", "Good morning"],
+      "responses": ["Hello! How can I assist you today?"]
+    },
+    {
+      "tag": "order",
+      "patterns": [
+        "I want to order groceries",
+        "Order some food",
+        "Buy groceries"
+      ],
+      "responses": [
+        "Sure, I can help you with that. What groceries would you like to order?"
+      ]
+    },
+    {
+      "tag": "add_item",
+      "patterns": [
+        "Add apples to my cart",
+        "I need milk",
+        "Put bread in my basket"
+      ],
+      "responses": [
+        "Great choice! I've added that to your cart. Is there anything else you'd like to add?"
+      ]
+    },
+    {
+      "tag": "checkout",
+      "patterns": ["Proceed to checkout", "Complete my order", "Ready to pay"],
+      "responses": [
+        "Perfect! Let's get you to the checkout. Please confirm your delivery address and payment method."
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Goodbye", "See you later", "Thanks for your help"],
+      "responses": [
+        "Thank you for using our grocery ordering service. Have a wonderful day!"
+      ]
+    }
+  ]
+}

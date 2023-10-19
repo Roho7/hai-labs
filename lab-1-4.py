@@ -19,7 +19,7 @@ with open("dataset.txt", encoding=" utf8 ") as file:
 file_nl_removed = file_content.replace("\n", " ")
 file_p = "".join([char for char in file_nl_removed if char not in custom_punctuation])
 
-n_param = 1
+n_param = 4
 
 tokenized_text = nltk.word_tokenize(file_p)
 padded_text = [list(pad_both_ends(tokenized_text, n=n_param))]
