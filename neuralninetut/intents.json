@@ -1,0 +1,67 @@
+{
+  "intents": [
+    {
+      "tag": "greetings",
+      "patterns": ["hello", "hey", "hi", "sup", "whats up"],
+      "responses": [
+        "hi",
+        "yes?",
+        "hmm?",
+        "what can i do for you?",
+        "how can i help you?"
+      ]
+    },
+    {
+      "tag": "schedule",
+      "patterns": [
+        "what's my schedule for today?",
+        "show me my timetable",
+        "what do i have planned today?"
+      ],
+      "responses": [
+        "let me check your schedule",
+        "one moment, i'll fetch your timetable",
+        "sure, i'll show you your schedule"
+      ]
+    },
+    {
+      "tag": "add_event",
+      "patterns": [
+        "add an event to my timetable",
+        "schedule a meeting for tomorrow",
+        "can you put a reminder for me?"
+      ],
+      "responses": [
+        "of course, what's the event?",
+        "when is the meeting?",
+        "what time should i set the reminder for?"
+      ]
+    },
+    {
+      "tag": "remove_event",
+      "patterns": [
+        "cancel my appointment",
+        "delete the event from my timetable",
+        "i don't need the reminder anymore"
+      ],
+      "responses": [
+        "which event would you like to remove?",
+        "sure, let me find the event and remove it",
+        "ok, the reminder has been deleted"
+      ]
+    },
+    {
+      "tag": "update_event",
+      "patterns": [
+        "change the time of my meeting",
+        "update the event details",
+        "can you reschedule my appointment?"
+      ],
+      "responses": [
+        "which event would you like to update?",
+        "sure, what's the new time for the meeting?",
+        "ok, the event has been rescheduled"
+      ]
+    }
+  ]
+}
