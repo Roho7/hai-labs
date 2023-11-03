@@ -2,7 +2,16 @@
   "intents": [
     {
       "tag": "greetings",
-      "patterns": ["hello", "hey", "hi", "sup", "whats up", "i am good"],
+      "patterns": [
+        "hello",
+        "hey",
+        "hi",
+        "sup",
+        "you there?",
+        "good morning",
+        "good afternoon",
+        "bro"
+      ],
       "responses": [
         "hi",
         "yes?",
@@ -10,6 +19,23 @@
         "hey, what can i do for you?",
         "how can i help you?",
         "what's up?"
+      ]
+    },
+    {
+      "tag": "small-talk",
+      "patterns": [
+        "whats up?",
+        "how is life?",
+        "how is everything?",
+        "you alright?",
+        "how is it hanging?"
+      ],
+      "responses": [
+        "you know, same old",
+        "meh",
+        "yeah you know, hanging around",
+        "nothing much",
+        "who knows man, life"
       ]
     },
     {
@@ -160,7 +186,25 @@
         "set a timer for 5 minutes",
         "remind me to brush at 7 AM"
       ],
-      "responses": ["sure, done", "item added to your schedule"]
+      "responses": [
+        "sure, done",
+        "item added to your schedule",
+        "i've added it, want to add another?"
+      ]
+    },
+    {
+      "tag": "how_to",
+      "patterns": [
+        "how do i add tasks?",
+        "how do i remove tasks?",
+        "how can i add events?",
+        "how do add stuff?",
+        "can i add stuff?",
+        "correct way to add tasks"
+      ],
+      "responses": [
+        "You can add tasks my typing someting like: 'Add [task] at [time]' "
+      ]
     },
     {
       "tag": "show_task",
