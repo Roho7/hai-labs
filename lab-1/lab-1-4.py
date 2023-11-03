@@ -13,7 +13,7 @@ lm = Laplace(2)
 custom_punctuation = string.punctuation + "’" + "-" + "‘" + "-"
 custom_punctuation = custom_punctuation.replace(".", "")
 
-with open("dataset.txt", encoding=" utf8 ") as file:
+with open("lab-1/dataset.txt", encoding=" utf8 ") as file:
     file_content = file.read()
 
 file_nl_removed = file_content.replace("\n", " ")

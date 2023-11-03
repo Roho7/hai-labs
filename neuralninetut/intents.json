@@ -2,25 +2,59 @@
   "intents": [
     {
       "tag": "greetings",
-      "patterns": ["hello", "hey", "hi", "sup", "whats up"],
+      "patterns": ["hello", "hey", "hi", "sup", "whats up", "i am good"],
       "responses": [
         "hi",
         "yes?",
         "hmm?",
-        "what can i do for you?",
-        "how can i help you?"
+        "hey, what can i do for you?",
+        "how can i help you?",
+        "what's up?"
+      ]
+    },
+    {
+      "tag": "well-being",
+      "patterns": [
+        "how are you?",
+        "how are you doing?",
+        "everything good?",
+        "all good?",
+        "you good?",
+        "you alright?"
+      ],
+      "responses": [
+        "I am great, how are you?",
+        "I'm doing fine, how can i help you today?",
+        "I have no body, so i cannot be good or bad. What's up?",
+        "I'm fine. What can I do for you today?",
+        "I'm good. How can i help you?"
+      ]
+    },
+    {
+      "tag": "capabilities",
+      "patterns": [
+        "what can you do?",
+        "what are your powers?",
+        "tell me what you can do",
+        "what is your purpose?",
+        "what is your goal?"
+      ],
+      "responses": [
+        "I can manage your time for you",
+        "I can manage your life",
+        "I can set reminders, dates, events and much more to help you organize your life."
       ]
     },
     {
       "tag": "name",
       "patterns": [
-        "what is your name",
+        "what is your name?",
         "name",
         "who are you",
-        "what can i call you",
-        "can you tell me who you are",
-        "can you tell me your name",
-        "who do you think you are"
+        "what can i call you?",
+        "can you tell me who you are?",
+        "can you tell me your name?",
+        "who do you think you are?"
       ],
       "responses": [
         "I'm Zeitkönig",
@@ -30,6 +64,22 @@
         "i am better known as Zeitkönig",
         "i am Zeitkönig, the king of time",
         "Zeitkönig is my name"
+      ]
+    },
+    {
+      "tag": "family",
+      "patterns": [
+        "who built you?",
+        "who are your parents?",
+        "where are you from?",
+        "do you know who built you?",
+        "do you have any parents?"
+      ],
+      "responses": [
+        "I was build by a forgettable nerd",
+        "I don't want to talk about it",
+        "I was built by a person much smarter than you",
+        "i am Zeitkönig, the son of a bitch"
       ]
     },
     {
@@ -90,9 +140,40 @@
         "i love you",
         "you are amazing",
         "i want to kiss you",
-        "you are so sweet"
+        "you are so sweet",
+        "you are amazing",
+        "you are the love of my life"
       ],
-      "responses": ["I love you too", "i prefer women"]
+      "responses": [
+        "I love you too",
+        "i prefer women",
+        "love is an amazing thing",
+        "uh...i have a girlfriend",
+        "i am not into stupid people"
+      ]
+    },
+    {
+      "tag": "add_task",
+      "patterns": [
+        "Add this to my day",
+        "add shopping at 5 o'clock",
+        "set a timer for 5 minutes",
+        "remind me to brush at 7 AM"
+      ],
+      "responses": ["sure, done", "item added to your schedule"]
+    },
+    {
+      "tag": "show_task",
+      "patterns": [
+        "Tell me about my day",
+        "What tasks do i have?",
+        "What all do i have to do today?",
+        "tell me my schedule",
+        "what is in my routine today?",
+        "what do i have today?",
+        "is there anything left for me to do today?"
+      ],
+      "responses": ["this is your schedule so far"]
     }
   ]
 }
