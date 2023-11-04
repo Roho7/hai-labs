@@ -14,7 +14,7 @@ export const ChatBox = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChat(e.target.value);
   };
-  const getData = async (e) => {
+  const getData = async (e: React.FormEvent) => {
     e.preventDefault();
     const msg = { msg: chat };
     try {

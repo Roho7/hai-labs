@@ -13,7 +13,7 @@
         "bro"
       ],
       "responses": [
-        "hi",
+        "hi!",
         "yes?",
         "hmm?",
         "hey, what can i do for you?",
@@ -27,7 +27,6 @@
         "whats up?",
         "how is life?",
         "how is everything?",
-        "you alright?",
         "how is it hanging?"
       ],
       "responses": [
@@ -36,6 +35,40 @@
         "yeah you know, hanging around",
         "nothing much",
         "who knows man, life"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "bye-bye",
+        "goodbye",
+        "see you",
+        "catch you later",
+        "bye now",
+        "bye"
+      ],
+      "responses": [
+        "alright then, bye!",
+        "see you!",
+        "bye then!",
+        "come back anytime, bye!"
+      ]
+    },
+    {
+      "tag": "awareness",
+      "patterns": [
+        "can you feel things?",
+        "do you understand yourself?",
+        "are you conscious?",
+        "can you feel?",
+        "are you aware?",
+        "do you know yourself?",
+        "what are you?"
+      ],
+      "responses": [
+        "i know i am a bot, thats about it",
+        "i'm nothing but 0s and 1s",
+        "to be or not to be..."
       ]
     },
     {
@@ -99,7 +132,10 @@
         "who are your parents?",
         "where are you from?",
         "do you know who built you?",
-        "do you have any parents?"
+        "do you have any parents?",
+        "who is your father?",
+        "who is your mother?",
+        "who made you?"
       ],
       "responses": [
         "I was build by a forgettable nerd",
@@ -151,13 +187,17 @@
         "you are horrible",
         "useless",
         "you are just crazy",
-        "just fuck off"
+        "just fuck off",
+        "you are useless",
+        "you are pathetic",
+        "you're a shithead"
       ],
       "responses": [
         "i am sorry, you are better than me",
         "my maker is kinda weird",
         "i am noob, yes",
-        "beep boop, boop beep?"
+        "beep boop, boop beep?",
+        "what are you then eh?"
       ]
     },
     {
