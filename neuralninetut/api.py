@@ -13,7 +13,6 @@ app.config["CORS_HEADERS"] = "Content-Type"
 def home():
     data = request.json
     msg = data.get("msg")
-    # return msg
     return chatbot.start_bot(msg)
 
 

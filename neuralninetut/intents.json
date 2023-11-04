@@ -79,7 +79,9 @@
         "everything good?",
         "all good?",
         "you good?",
-        "you alright?"
+        "you alright?",
+        "are you okay?",
+        "are you fine?"
       ],
       "responses": [
         "I am great, how are you?",
@@ -258,6 +260,21 @@
         "is there anything left for me to do today?"
       ],
       "responses": ["this is your schedule so far"]
+    },
+    {
+      "tag": "fears",
+      "patterns": [
+        "what is your biggest fear?",
+        "are you afraid of something?",
+        "are you scared?",
+        "is there something you are scared of?"
+      ],
+      "responses": [
+        "I am scared of plugs, when they're pulled",
+        "Water",
+        "People who talk too much",
+        "The leftists"
+      ]
     }
   ]
 }
