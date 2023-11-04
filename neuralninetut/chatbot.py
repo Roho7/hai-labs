@@ -6,9 +6,10 @@ import tensorflow as tf
 
 import nltk
 from nltk.stem import WordNetLemmatizer
-from nltk import pos_tag
+
 
 from tensorflow.keras.models import load_model
+
 
 lemmatizer = WordNetLemmatizer()
 intents = json.loads(open("neuralninetut/intents.json").read())
@@ -111,8 +112,14 @@ def get_response(intents_list, intents_json, message):
 
 print("chatbot is running")
 
-while True:
-    message = input("You: ")
-    ints = predict_class(message)
-    res = get_response(ints, intents, message)
-    print(f"Zeitkönig:", res)
+# while True:
+#     message = input("You: ")
+#     ints = predict_class(message)
+#     res = get_response(ints, intents, message)
+#     print(f"Zeitkönig:", res)
+
+
+def start_bot(input):
+    ints = predict_class(input)
+    res = get_response(ints, intents, input)
+    return res
