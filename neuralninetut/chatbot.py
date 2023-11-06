@@ -80,7 +80,7 @@ def show_tasks():
     output = ""
     tasks = sort_tasks()
     if not tasks:
-        return "You have nothing scheduled today"
+        return "You have nothing scheduled for today"
     for index, item in enumerate(tasks):
         if index == 0:
             message = f"You have", item["task"], "at", item["time"]
@@ -102,7 +102,9 @@ def remove_tasks(sentence):
     bow = input_list[1]
     for item in tasks:
         if item["task"] == bow:
-            return bow
+            tasks.remove(item)
+            other_tasks = show_tasks()
+            return f"{item['task']} removed from your day. {other_tasks}"
         else:
             return "Item not found"
 

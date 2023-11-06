@@ -184,19 +184,22 @@
       "tag": "angry",
       "patterns": [
         "idiot",
-        "mad",
-        "shut up",
+        "shut the fuck up",
         "you are horrible",
+        "you suck",
+        "you are useless",
+        "you don't know shit",
+        "you are a peice of garbage",
         "useless",
-        "you are just crazy",
-        "just fuck off",
+        "fuck off",
         "you are useless",
         "you are pathetic",
         "you're a shithead"
       ],
       "responses": [
         "i am sorry, you are better than me",
-        "my maker is kinda weird",
+        "my maker was on drugs when he built me",
+        "humble yourself",
         "i am noob, yes",
         "beep boop, boop beep?",
         "what are you then eh?"
@@ -223,10 +226,10 @@
     {
       "tag": "add_task",
       "patterns": [
-        "Add this to my day",
         "add shopping at 5 o'clock",
-        "set a timer for 5 minutes",
-        "remind me to brush at 7 AM"
+        "add taking out mom at 3pm",
+        "add cooking at 1",
+        "add forgetting the world at 5am"
       ],
       "responses": [
         "sure, done",
@@ -248,6 +251,10 @@
     {
       "tag": "how_to",
       "patterns": [
+        "add this to my day",
+        "add cooking in the evening",
+        "remind me to cook at night",
+        "remind me to do this",
         "how do i add tasks?",
         "how do i remove tasks?",
         "how can i add events?",
@@ -256,7 +263,8 @@
         "correct way to add tasks"
       ],
       "responses": [
-        "You can add tasks my typing someting like: 'Add [task] at [time]' "
+        "You can add tasks by typing someting like: 'Add [task] at [time]' ",
+        "To add tasks, say: 'Add [task] at [time]' "
       ]
     },
     {
@@ -285,6 +293,21 @@
         "Water",
         "People who talk too much",
         "The leftists"
+      ]
+    },
+    {
+      "tag": "random_facts",
+      "patterns": [
+        "tell me a random fact",
+        "tell me something unique",
+        "random fact",
+        "surprise me",
+        "tell me something i dont know",
+        "tell me something interesting"
+      ],
+      "responses": [
+        "Poop moves at a speed of approximately 2cm/s",
+        "Everyday the moon moves away from earth by 0.01mm"
       ]
     }
   ]

@@ -10,7 +10,7 @@ interface ResponseType {
 
 export const ChatBox = () => {
   const [chat, setChat] = useState<string>();
-  const [placeholder, setPlaceholder] = useState("");
+  const [placeholder, setPlaceholder] = useState("'Add cooking at 7pm'");
   const [response, setResponse] = useState<ResponseType>({ data: "" });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChat(e.target.value);
@@ -28,18 +28,24 @@ export const ChatBox = () => {
   };
 
   const placeholdersArr = [
-    "Say 'Add cooking at 7pm' ",
-    "Ask 'What can you do?'",
-    "Ask 'What's up?'",
-    "Ask 'What is the weather?'",
-    "Ask about your day",
+    "'Add cooking at 7pm' ",
+    "'What can you do?'",
+    "'What's up?'",
+    "'What is the weather like today?'",
+    "'What does my day look like?'",
+    "'Who are you?'",
+    "'How's it hanging?'",
+    "'Tell me a joke'",
+    "'Who built you?'",
+    "'Show me my schedule'",
   ];
   useEffect(() => {
-    setTimeout(() => {
-      const rand = Math.floor(Math.random() * (3 - 1));
+    const interval = setInterval(() => {
+      const rand = Math.floor(Math.random() * 9);
       setPlaceholder(placeholdersArr[rand]);
     }, 5000);
-  }, [placeholder]);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className="flex flex-col gap-2 w-full">
       <div>
