@@ -105,7 +105,7 @@ def remove_tasks(sentence):
             tasks.remove(item)
             other_tasks = show_tasks()
             return f"{item['task']} removed from your day. {other_tasks}"
-        else:
+        if item["task"] not in tasks:
             return "Item not found"
 
 
