@@ -79,6 +79,8 @@ def sort_tasks():
 def show_tasks():
     output = ""
     tasks = sort_tasks()
+    if not tasks:
+        return "You have nothing scheduled today"
     for index, item in enumerate(tasks):
         if index == 0:
             message = f"You have", item["task"], "at", item["time"]
@@ -95,6 +97,16 @@ def show_tasks():
     return output
 
 
+def remove_tasks(sentence):
+    input_list = nltk.word_tokenize(sentence)
+    bow = input_list[1]
+    for item in tasks:
+        if item["task"] == bow:
+            return bow
+        else:
+            return "Item not found"
+
+
 def get_response(intents_list, intents_json, message):
     tag = intents_list[0]["intent"]
     list_of_intents = intents_json["intents"]
@@ -104,6 +116,9 @@ def get_response(intents_list, intents_json, message):
                 add_task(message)
             if i["tag"] == "show_task":
                 result = show_tasks()
+                return result
+            if i["tag"] == "remove_task":
+                result = remove_tasks(message)
                 return result
             result = random.choice(i["responses"])
             break

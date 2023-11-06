@@ -235,6 +235,17 @@
       ]
     },
     {
+      "tag": "remove_task",
+      "patterns": [
+        "remove this event",
+        "remove dancing from my day",
+        "remove sleeping from my schedule",
+        "cancel this from my schedule",
+        "cancel all events"
+      ],
+      "responses": ["sure, done", "sure, i've removed it"]
+    },
+    {
       "tag": "how_to",
       "patterns": [
         "how do i add tasks?",
