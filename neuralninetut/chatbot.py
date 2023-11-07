@@ -3,10 +3,11 @@ import json
 import pickle
 import numpy as np
 import tensorflow as tf
+import wikipediaapi
 
 import nltk
 from nltk.stem import WordNetLemmatizer
-
+from nltk import pos_tag
 
 from tensorflow.keras.models import load_model
 
@@ -54,7 +55,6 @@ def add_task(sentence):
     input_list = nltk.word_tokenize(sentence)
     task = ""
     time = ""
-
     for item in input_list:
         if item == "add":
             task = ""
@@ -105,8 +105,41 @@ def remove_tasks(sentence):
             tasks.remove(item)
             other_tasks = show_tasks()
             return f"{item['task']} removed from your day. {other_tasks}"
-        if item["task"] not in tasks:
+        elif item["task"] not in tasks:
             return "Item not found"
+
+
+# ======== WIKIPEDIA API =========
+def get_wiki(sentence):
+    clean_sent = clean_up_sentence(sentence)
+    if "a" in clean_sent:
+        clean_sent.remove("a")
+    pos = pos_tag(clean_sent)
+    if pos[0][1] == "WP" or pos[0][0].lower() in [
+        "what",
+        "who",
+        "where",
+        "when",
+        "how",
+    ]:
+        try:
+            if "is" in clean_sent:
+                is_index = clean_sent.index("is")
+            elif "was" in clean_sent:
+                is_index = clean_sent.index("was")
+            else:
+                is_index = 1
+            search_query_arr = clean_sent[is_index + 1 : len(clean_sent)]
+            query = " ".join(search_query_arr)
+        except (ValueError, IndexError):
+            print("No word found in the query.")
+
+    wiki_wiki = wikipediaapi.Wikipedia("Zeitkonig (roho.bhattacharya@gmail.com)", "en")
+    page_py = wiki_wiki.page(query)
+    if not page_py.summary:
+        return "Couldn't find anything. Could you try that again?"
+    return f"According to wikipedia, {page_py.summary[0:400]}..."
+    # return f"According to wikipedia, {page_py.summary[0 : 200]}"
 
 
 def get_response(intents_list, intents_json, message):
@@ -122,6 +155,9 @@ def get_response(intents_list, intents_json, message):
             if i["tag"] == "remove_task":
                 result = remove_tasks(message)
                 return result
+            if i["tag"] == "wiki":
+                result = get_wiki(message)
+                return result
             result = random.choice(i["responses"])
             break
     return result
@@ -133,6 +169,8 @@ print("chatbot is running")
 #     message = input("You: ")
 #     ints = predict_class(message)
 #     res = get_response(ints, intents, message)
+#     # clean = clean_up_sentence(message)
+#     # lem = [stemmer.stem(item) for item in clean]
 #     print(f"Zeitkönig:", res)
 
 
