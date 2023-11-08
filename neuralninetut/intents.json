@@ -171,7 +171,12 @@
         "weather today?",
         "is it going to rain?",
         "what is the weather like today?",
-        "what is weather?"
+        "what is weather?",
+        "what is the temperature at Kolkata today?",
+        "how is the weather in London?",
+        "what is the weather like right now?",
+        "weather in london right now",
+        "temperature in italy"
       ],
       "responses": [
         "it might rain",

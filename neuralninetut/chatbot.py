@@ -4,10 +4,15 @@ import pickle
 import numpy as np
 import tensorflow as tf
 import wikipediaapi
+import pyowm
+import math
+import requests
+
 
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk import pos_tag
+from nltk.tree import Tree
 
 from tensorflow.keras.models import load_model
 
@@ -20,6 +25,9 @@ classes = pickle.load(open("neuralninetut/classes.pkl", "rb"))
 model = load_model("neuralninetut/chatbot_model.h5")
 
 tasks = []
+
+api_key = "6dd7e7d54ae82988a40c243f4ed0c8fb"
+owm = pyowm.OWM(api_key)
 
 
 def clean_up_sentence(sentence):
@@ -66,6 +74,8 @@ def add_task(sentence):
 
     task = task.strip()
 
+    if time == "":
+        return "Okay, but you need to tell me when you want to do it. Say something like: 'Add [task] at [time]"
     if task and time:
         tasks.append({"task": task, "time": time})
     else:
@@ -105,8 +115,8 @@ def remove_tasks(sentence):
             tasks.remove(item)
             other_tasks = show_tasks()
             return f"{item['task']} removed from your day. {other_tasks}"
-        elif item["task"] not in tasks:
-            return "Item not found"
+    if bow not in tasks:
+        return "Item not found"
 
 
 # ======== WIKIPEDIA API =========
@@ -142,6 +152,48 @@ def get_wiki(sentence):
     # return f"According to wikipedia, {page_py.summary[0 : 200]}"
 
 
+# ======== WEATHER ==========
+def get_continuous_chunks(text):
+    tagged_sent = pos_tag(nltk.word_tokenize(text))
+    for i in range(len(tagged_sent)):
+        word, tag = tagged_sent[i]
+        if tag == "NN" and word != "temperature" and word != "weather":
+            tagged_sent[i] = (word.capitalize(), tag)
+    chunked = nltk.ne_chunk(tagged_sent)
+    continuous_chunk = []
+    current_chunk = []
+    for i in chunked:
+        if type(i) == Tree:
+            current_chunk.append(" ".join([token for token, pos in i.leaves()]))
+        if current_chunk:
+            named_entity = " ".join(current_chunk)
+            if named_entity not in continuous_chunk:
+                continuous_chunk.append(named_entity)
+                current_chunk = []
+        else:
+            continue
+    return continuous_chunk
+
+
+def get_weather(sentence):
+    location = get_continuous_chunks(sentence)
+    weather_mgr = owm.weather_manager()
+    try:
+        # observation = weather_mgr.weather_at_place(location[0])
+        # temp = observation.weather.temperature("celsius")["temp"]
+        response = requests.get(
+            f"https://api.openweathermap.org/data/2.5/weather?q={location[0]}&APPID={api_key}"
+        ).json()
+        temp = str(math.ceil(response["main"]["temp"] - 273.15))
+        weather = response["weather"][0]["description"]
+        main = response["weather"][0]["main"]
+    except:
+        return "Couldn't understand"
+    if main == "Clouds":
+        return f"In {location[0].capitalize()}, it is currently {temp}°C and there are {weather}"
+    return f"In {location[0].capitalize()}, it is currently {temp}°C and there is {weather}"
+
+
 def get_response(intents_list, intents_json, message):
     tag = intents_list[0]["intent"]
     list_of_intents = intents_json["intents"]
@@ -157,6 +209,9 @@ def get_response(intents_list, intents_json, message):
                 return result
             if i["tag"] == "wiki":
                 result = get_wiki(message)
+                return result
+            if i["tag"] == "weather":
+                result = get_weather(message)
                 return result
             result = random.choice(i["responses"])
             break
