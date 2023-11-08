@@ -25,6 +25,7 @@
       "tag": "small-talk",
       "patterns": [
         "whats up?",
+        "what up",
         "how is life?",
         "how is everything?",
         "how is it hanging?"
@@ -169,9 +170,8 @@
       "patterns": [
         "rain today?",
         "weather today?",
-        "is it going to rain?",
         "what is the weather like today?",
-        "what is weather?",
+        "tell me the weather today",
         "what is the temperature at Kolkata today?",
         "how is the weather in London?",
         "what is the weather like right now?",

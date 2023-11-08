@@ -124,6 +124,8 @@ def get_wiki(sentence):
     clean_sent = clean_up_sentence(sentence)
     if "a" in clean_sent:
         clean_sent.remove("a")
+    if "an" in clean_sent:
+        clean_sent.remove("an")
     pos = pos_tag(clean_sent)
     if pos[0][1] == "WP" or pos[0][0].lower() in [
         "what",
@@ -148,8 +150,7 @@ def get_wiki(sentence):
     page_py = wiki_wiki.page(query)
     if not page_py.summary:
         return "Couldn't find anything. Could you try that again?"
-    return f"According to wikipedia, {page_py.summary[0:400]}..."
-    # return f"According to wikipedia, {page_py.summary[0 : 200]}"
+    return f"According to wikipedia, {page_py.summary[0:400]}...To learn more you can go to {page_py.fullurl}"
 
 
 # ======== WEATHER ==========
@@ -172,12 +173,13 @@ def get_continuous_chunks(text):
                 current_chunk = []
         else:
             continue
-    return continuous_chunk
+    return continuous_chunk or ["Nottingham"]
 
 
 def get_weather(sentence):
     location = get_continuous_chunks(sentence)
-    weather_mgr = owm.weather_manager()
+    # weather_mgr = owm.weather_manager()
+
     try:
         # observation = weather_mgr.weather_at_place(location[0])
         # temp = observation.weather.temperature("celsius")["temp"]
