@@ -60,7 +60,7 @@ def predict_class(sentence):
 
 
 def add_task(sentence):
-    input_list = nltk.word_tokenize(sentence)
+    input_list = clean_up_sentence(sentence)
     task = ""
     time = ""
     for item in input_list:
@@ -145,11 +145,15 @@ def get_wiki(sentence):
             query = " ".join(search_query_arr)
         except (ValueError, IndexError):
             print("No word found in the query.")
-
-    wiki_wiki = wikipediaapi.Wikipedia("Zeitkonig (roho.bhattacharya@gmail.com)", "en")
-    page_py = wiki_wiki.page(query)
-    if not page_py.summary:
-        return "Couldn't find anything. Could you try that again?"
+    try:
+        wiki_wiki = wikipediaapi.Wikipedia(
+            "Zeitkonig (roho.bhattacharya@gmail.com)", "en"
+        )
+        page_py = wiki_wiki.page(query)
+        if not page_py.summary:
+            return "Couldn't find anything. Could you try that again?"
+    except:
+        return "I didn't get that, come again?"
     return f"According to wikipedia, {page_py.summary[0:400]}...To learn more you can go to {page_py.fullurl}"
 
 
@@ -173,7 +177,9 @@ def get_continuous_chunks(text):
                 current_chunk = []
         else:
             continue
-    return continuous_chunk or ["Nottingham"]
+    if continuous_chunk == []:
+        return ["Nottingham"]
+    return continuous_chunk
 
 
 def get_weather(sentence):
@@ -196,6 +202,12 @@ def get_weather(sentence):
     return f"In {location[0].capitalize()}, it is currently {temp}°C and there is {weather}"
 
 
+# ======== USERNAME ========
+def get_username(sentence):
+    name = get_continuous_chunks(sentence)
+    return name
+
+
 def get_response(intents_list, intents_json, message):
     tag = intents_list[0]["intent"]
     list_of_intents = intents_json["intents"]
@@ -215,6 +227,8 @@ def get_response(intents_list, intents_json, message):
             if i["tag"] == "weather":
                 result = get_weather(message)
                 return result
+            if i["tag"] == "username":
+                result = get_username(message)
             result = random.choice(i["responses"])
             break
     return result

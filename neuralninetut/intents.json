@@ -129,6 +129,11 @@
       ]
     },
     {
+      "tag": "username",
+      "patterns": ["My name is Rohosen", "My name is amit"],
+      "responses": ["Hi!"]
+    },
+    {
       "tag": "family",
       "patterns": [
         "who built you?",

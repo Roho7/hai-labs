@@ -13,38 +13,37 @@ intents = json.loads(open("neuralninetut/intents.json").read())
 
 words = []
 classes = []
-documents = []
-ignoreLetters = ["?", "!", ".", ","]
+document_list = []
+ignore_letters = ["?", "!", ".", ","]
 
 for intent in intents["intents"]:
     for pattern in intent["patterns"]:
         wordList = nltk.word_tokenize(pattern)
         words.extend(wordList)
-        documents.append((wordList, intent["tag"]))
+        document_list.append((wordList, intent["tag"]))
         if intent["tag"] not in classes:
             classes.append(intent["tag"])
 
-words = [lemmatizer.lemmatize(word) for word in words if word not in ignoreLetters]
+words = [lemmatizer.lemmatize(word) for word in words if word not in ignore_letters]
 words = sorted(set(words))
 
 classes = sorted(set(classes))
 
-pickle.dump(words, open("neuralninetut/words.pkl", "wb"))
 pickle.dump(classes, open("neuralninetut/classes.pkl", "wb"))
+pickle.dump(words, open("neuralninetut/words.pkl", "wb"))
 
 training = []
 outputEmpty = [0] * len(classes)
 
-for document in documents:
-    bag = []
-    wordPatterns = document[0]
-    wordPatterns = [lemmatizer.lemmatize(word.lower()) for word in wordPatterns]
+for document in document_list:
+    word_patters = document[0]
+    bow = []
+    word_patters = [lemmatizer.lemmatize(word.lower()) for word in word_patters]
     for word in words:
-        bag.append(1) if word in wordPatterns else bag.append(0)
-
+        bow.append(1) if word in word_patters else bow.append(0)
     outputRow = list(outputEmpty)
     outputRow[classes.index(document[1])] = 1
-    training.append(bag + outputRow)
+    training.append(bow + outputRow)
 
 random.shuffle(training)
 training = np.array(training)
