@@ -2,13 +2,10 @@ import random
 import json
 import pickle
 import numpy as np
-import tensorflow as tf
 import wikipediaapi
 import pyowm
 import math
 import requests
-
-
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk import pos_tag
@@ -157,7 +154,7 @@ def get_wiki(sentence):
     return f"According to wikipedia, {page_py.summary[0:400]}...To learn more you can go to {page_py.fullurl}"
 
 
-# ======== WEATHER ==========
+# =========== WEATHER =============
 def get_continuous_chunks(text):
     tagged_sent = pos_tag(nltk.word_tokenize(text))
     for i in range(len(tagged_sent)):
@@ -184,11 +181,8 @@ def get_continuous_chunks(text):
 
 def get_weather(sentence):
     location = get_continuous_chunks(sentence)
-    # weather_mgr = owm.weather_manager()
 
     try:
-        # observation = weather_mgr.weather_at_place(location[0])
-        # temp = observation.weather.temperature("celsius")["temp"]
         response = requests.get(
             f"https://api.openweathermap.org/data/2.5/weather?q={location[0]}&APPID={api_key}"
         ).json()
@@ -202,10 +196,15 @@ def get_weather(sentence):
     return f"In {location[0].capitalize()}, it is currently {temp}°C and there is {weather}"
 
 
-# ======== USERNAME ========
+# ============ USERNAME ============
 def get_username(sentence):
-    name = get_continuous_chunks(sentence)
-    return name
+    words = nltk.word_tokenize(sentence)
+    tagged_sent = pos_tag(words)
+    proper_nouns = [word for word, tag in tagged_sent if tag == "NNP"]
+    # for w, tag in tagged_sent:
+    #     if tag == "NNP":
+    #         return w
+    return f"Hi {proper_nouns[0]}!"
 
 
 def get_response(intents_list, intents_json, message):
@@ -229,6 +228,7 @@ def get_response(intents_list, intents_json, message):
                 return result
             if i["tag"] == "username":
                 result = get_username(message)
+                return result
             result = random.choice(i["responses"])
             break
     return result
