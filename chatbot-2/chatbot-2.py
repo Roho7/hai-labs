@@ -5,7 +5,7 @@ from nltk.stem import PorterStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.stem import WordNetLemmatizer
-from add_task import add_task
+from tasks import add_task, show_tasks
 
 lemmatizer = WordNetLemmatizer()
 
@@ -20,7 +20,7 @@ stemmer = PorterStemmer()
 
 # preprocess the text
 def preprocess_text(text):
-    tokens = nltk.word_tokenize(text.lower())
+    tokens = nltk.word_tokenize(str(text).lower())
     tokens = [
         stemmer.stem(token)
         for token in tokens
@@ -45,12 +45,14 @@ def get_similarity(pre_processed):
 def get_response(sentence, raw):
     max_similarity_index = get_similarity(sentence).argmax()
     response = df["Answer"][max_similarity_index]
-    qid = df["QuestionID"][max_similarity_index]
     qdoc = df["Document"][max_similarity_index]
     if qdoc == "add_task":
         result = add_task(raw)
         return f"{result}"
-    return f"{format(response)},{qdoc}, {max_similarity_index}"
+    if qdoc == "show_task":
+        result = show_tasks()
+        return result
+    return f"{format(response)}"
 
 
 while True:
