@@ -4,6 +4,10 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from nltk.stem import WordNetLemmatizer
+from add_task import add_task
+
+lemmatizer = WordNetLemmatizer()
 
 
 df = pd.read_csv("chatbot-2/dataset.csv")
@@ -32,13 +36,25 @@ tfidf_vectorizer = TfidfVectorizer()
 tfidf_matrix = tfidf_vectorizer.fit_transform(df["Question"])
 
 
-user_input = input("Ask a question: ")
-user_input = preprocess_text(user_input)
-user_vector = tfidf_vectorizer.transform([user_input])
+def get_similarity(pre_processed):
+    user_vector = tfidf_vectorizer.transform([pre_processed])
+    cosine_similarities = cosine_similarity(user_vector, tfidf_matrix).flatten()
+    return cosine_similarities
 
 
-cosine_similarities = cosine_similarity(user_vector, tfidf_matrix).flatten()
-max_similarity_index = cosine_similarities.argmax()
-response = df["Answer"][max_similarity_index]
+def get_response(sentence, raw):
+    max_similarity_index = get_similarity(sentence).argmax()
+    response = df["Answer"][max_similarity_index]
+    qid = df["QuestionID"][max_similarity_index]
+    qdoc = df["Document"][max_similarity_index]
+    if qdoc == "add_task":
+        result = add_task(raw)
+        return f"{result}"
+    return f"{format(response)},{qdoc}, {max_similarity_index}"
 
-print("Bot: {}".format(response))
+
+while True:
+    user_input = input("Ask a question: ")
+    pre_processed = preprocess_text(user_input)
+    response = get_response(pre_processed, user_input)
+    print(f"Bot:", response)
