@@ -1,3 +1,4 @@
+import nltk
 from cleanup import clean_up_sentence
 
 tasks = []
@@ -25,6 +26,18 @@ def add_task(sentence):
         return tasks
     else:
         print("Input format is not valid.")
+
+
+def remove_tasks(sentence):
+    input_list = nltk.word_tokenize(sentence)
+    bow = input_list[1]
+    for item in tasks:
+        if item["task"] == bow:
+            tasks.remove(item)
+            other_tasks = show_tasks()
+            return f"{item['task']} removed from your day. {other_tasks}"
+    if bow not in tasks:
+        return "Item not found"
 
 
 def sort_tasks():
