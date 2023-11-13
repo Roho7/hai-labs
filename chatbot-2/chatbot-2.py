@@ -19,7 +19,6 @@ df = pd.read_csv("chatbot-2/dataset.csv")
 vocab = json.loads(open("chatbot-2/intents.json").read())
 intents = json.loads(open("chatbot-2/intents.json").read())
 
-nltk.download("stopwords")
 stop_words = set(stopwords.words("english"))
 stemmer = PorterStemmer()
 
@@ -46,9 +45,8 @@ y_train = [intent["tag"] for intent in intents["intents"] for _ in intent["patte
 model = make_pipeline(TfidfVectorizer(), MultinomialNB())
 model.fit(X_train, y_train)
 
-# ===== USE COSINE SIMILARITY ==============
+# ========= USE COSINE SIMILARITY ==============
 df["Question"] = df["Question"].apply(preprocess_text)
-
 tfidf_vectorizer = TfidfVectorizer()
 tfidf_matrix = tfidf_vectorizer.fit_transform(df["Question"])
 
@@ -59,26 +57,34 @@ def get_similarity(pre_processed):
     return cosine_similarities
 
 
+def get_score(pre_processed):
+    user_vector = tfidf_vectorizer.transform([pre_processed])
+    cosine_score = cosine_similarity(user_vector, tfidf_matrix).flatten()
+    return cosine_score
+
+
 def get_response(sentence, raw):
     max_similarity_index = get_similarity(sentence).argmax()
-    response = df["Answer"][max_similarity_index]
-    qdoc = df["Document"][max_similarity_index]
-    if qdoc == "add_task":
-        result = add_task(raw)
-        return f"{result}"
-    if qdoc == "show_task":
-        result = show_tasks()
-        return result
-    if qdoc == "greetings":
-        result = "Hey you!"
-        return result
-    if qdoc == "remove_tasks":
-        result = remove_tasks(raw)
-        return result
-    if qdoc == "store_name":
-        result = get_username(raw)
-        return result
-    return response
+    score = get_score(sentence)
+    print(score[max_similarity_index])  # getting score here between 0 - 1
+
+    if score[max_similarity_index] > 0.0:
+        response = df["Answer"][max_similarity_index]
+        qdoc = df["Document"][max_similarity_index]
+        if qdoc == "add_task":
+            result = add_task(raw)
+            return f"{result}"
+        if qdoc == "show_task":
+            result = show_tasks()
+            return result
+        if qdoc == "remove_tasks":
+            result = remove_tasks(raw)
+            return result
+        if qdoc == "store_name":
+            result = get_username(raw)
+            return result
+        return response
+    return None
 
 
 while True:
@@ -91,12 +97,12 @@ while True:
         intent["tag"]: intent["responses"] for intent in intents["intents"]
     }
 
-    similarity_match = get_response(pre_processed, user_input)
-    if type(similarity_match) == str:
-        response = similarity_match
+    cosine_response = get_response(pre_processed, user_input)
+    if cosine_response != None:
+        response = cosine_response + "cos"
     elif predicted_intent in intent_responses:
         responses = intent_responses[predicted_intent]
-        response = random.choice(responses)
+        response = random.choice(responses) + "clas"
     else:
         response = "what? come again?"
     print(f"Bot:", response)
