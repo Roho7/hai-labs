@@ -192,20 +192,7 @@
     },
     {
       "tag": "angry",
-      "patterns": [
-        "idiot",
-        "shut the fuck up",
-        "you are horrible",
-        "you suck",
-        "you are useless",
-        "you don't know shit",
-        "you are a peice of garbage",
-        "useless",
-        "fuck off",
-        "you are useless",
-        "you are pathetic",
-        "you're a shithead"
-      ],
+      "patterns": ["idiot", "shut the fuck up", "you are horrible", "you suck"],
       "responses": [
         "i am sorry, you are better than me",
         "my maker was on drugs when he built me",

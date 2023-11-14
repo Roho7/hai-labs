@@ -4,13 +4,12 @@ word_list = ["hey", "this", "is", "so", "fun"]
 
 
 class SpellChecker:
-    def __init__(self, word: str, sentence: list) -> None:
-        self.word = word
+    def __init__(self, sentence: list) -> None:
         self.sentence = sentence
 
-    def find_matches(self, word: str, sentence: list) -> list[str]:
+    def find_matches(self, word) -> list[str]:
         matches = []
-        for lst_word in sentence:
+        for lst_word in self.sentence:
             count = 0
             for i in range(len(lst_word)):
                 try:
@@ -23,11 +22,20 @@ class SpellChecker:
             if count > 1:
                 pass
             else:
-                matches.append(word)
-                return matches
+                matches.append(lst_word)
+        if matches != []:
+            return matches
         else:
             return False
 
+    def autocorrect_word(self, word):
+        match = self.find_matches(word)
+        match = sorted(match)
+        return match[0]
 
-p1 = SpellChecker("girls", ["cat", "dog", "girl"])
-p1.find_matches()
+
+# user_input = input("Enter: ")
+p1 = SpellChecker(["cat", "cap", "cag", "boy", "boi", "goy", "gay"]).autocorrect_word(
+    "boys"
+)
+print(p1)

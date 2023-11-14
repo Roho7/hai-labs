@@ -98,7 +98,7 @@ def get_response(sentence, raw):
             if predicted_intent == "username":
                 result = get_username(raw)
                 return result
-            return response + predicted_intent
+            return response
     return None
 
 
