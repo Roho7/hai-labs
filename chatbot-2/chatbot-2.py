@@ -10,6 +10,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
 from nltk.stem import WordNetLemmatizer
 from tasks import add_task, show_tasks, remove_tasks
+from weather import get_weather
 from name import get_username
 
 lemmatizer = WordNetLemmatizer()
@@ -68,41 +69,46 @@ def get_response(sentence, raw):
     score = get_score(sentence)
     print(score[max_similarity_index])  # getting score here between 0 - 1
 
-    if score[max_similarity_index] > 0.0:
+    if score[max_similarity_index] > 0.9:
         response = df["Answer"][max_similarity_index]
-        qdoc = df["Document"][max_similarity_index]
-        if qdoc == "add_task":
-            result = add_task(raw)
-            return f"{result}"
-        if qdoc == "show_task":
-            result = show_tasks()
-            return result
-        if qdoc == "remove_tasks":
-            result = remove_tasks(raw)
-            return result
-        if qdoc == "store_name":
-            result = get_username(raw)
-            return result
+        # qdoc = df["Document"][max_similarity_index]
         return response
+    else:
+        predicted_intent = model.predict([pre_processed])[0]
+        intent_responses = {
+            intent["tag"]: intent["responses"] for intent in intents["intents"]
+        }
+        if predicted_intent in intent_responses:
+            responses = intent_responses[predicted_intent]
+            response = random.choice(responses)
+            if predicted_intent == "add_task":
+                add_task(raw)
+            if predicted_intent == "show_task":
+                result = show_tasks()
+                return result
+            if predicted_intent == "remove_task":
+                result = remove_tasks(raw)
+                return result
+            # if predicted_intent == "wiki":
+            #     result = get_wiki(raw)
+            #     return result
+            if predicted_intent == "weather":
+                result = get_weather(raw)
+                return result
+            if predicted_intent == "username":
+                result = get_username(raw)
+                return result
+            return response + predicted_intent
     return None
 
 
 while True:
     user_input = input("Ask a question: ")
     pre_processed = preprocess_text(user_input)
-    predicted_intent = model.predict([pre_processed])[0]
 
-    # Generate Response Based on Predicted Intent
-    intent_responses = {
-        intent["tag"]: intent["responses"] for intent in intents["intents"]
-    }
-
-    cosine_response = get_response(pre_processed, user_input)
-    if cosine_response != None:
-        response = cosine_response + "cos"
-    elif predicted_intent in intent_responses:
-        responses = intent_responses[predicted_intent]
-        response = random.choice(responses) + "clas"
+    response = get_response(pre_processed, user_input)
+    if response != None:
+        response = response
     else:
         response = "what? come again?"
     print(f"Bot:", response)

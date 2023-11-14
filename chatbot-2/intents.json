@@ -189,6 +189,154 @@
         "i think it'll be sunny",
         "it is going to be okay"
       ]
+    },
+    {
+      "tag": "angry",
+      "patterns": [
+        "idiot",
+        "shut the fuck up",
+        "you are horrible",
+        "you suck",
+        "you are useless",
+        "you don't know shit",
+        "you are a peice of garbage",
+        "useless",
+        "fuck off",
+        "you are useless",
+        "you are pathetic",
+        "you're a shithead"
+      ],
+      "responses": [
+        "i am sorry, you are better than me",
+        "my maker was on drugs when he built me",
+        "humble yourself",
+        "i am noob, yes",
+        "beep boop, boop beep?",
+        "what are you then eh?"
+      ]
+    },
+    {
+      "tag": "love",
+      "patterns": [
+        "i love you",
+        "you are amazing",
+        "i want to kiss you",
+        "you are so sweet",
+        "you are amazing",
+        "you are the love of my life"
+      ],
+      "responses": [
+        "I love you too",
+        "i prefer women",
+        "love is an amazing thing",
+        "uh...i have a girlfriend",
+        "i am not into stupid people"
+      ]
+    },
+    {
+      "tag": "add_task",
+      "patterns": [
+        "add shopping at 5 o'clock",
+        "add taking out mom at 3pm",
+        "add cooking at 1",
+        "add forgetting the world at 5am",
+        "add cooking at 4pm",
+        "add groceries at 3pm",
+        "add going to the gym at 4pm",
+        "add dancing at 4 oclock",
+        "add designing at 5 oclock"
+      ],
+      "responses": [
+        "sure, done",
+        "item added to your schedule",
+        "i've added it, want to add another?"
+      ]
+    },
+    {
+      "tag": "remove_task",
+      "patterns": [
+        "remove this event",
+        "remove dancing from my day",
+        "remove sleeping from my schedule",
+        "cancel this from my schedule",
+        "cancel all events"
+      ],
+      "responses": ["sure, done", "sure, i've removed it"]
+    },
+    {
+      "tag": "how_to",
+      "patterns": [
+        "add this to my day",
+        "add cooking in the evening",
+        "remind me to cook at night",
+        "remind me to do this",
+        "how do i add tasks?",
+        "how do i remove tasks?",
+        "how can i add events?",
+        "how do add stuff?",
+        "can i add stuff?",
+        "correct way to add tasks"
+      ],
+      "responses": [
+        "You can add tasks by typing someting like: 'Add [task] at [time]' ",
+        "To add tasks, say: 'Add [task] at [time]' "
+      ]
+    },
+    {
+      "tag": "show_task",
+      "patterns": [
+        "Tell me about my day",
+        "What tasks do i have?",
+        "What all do i have to do today?",
+        "tell me my schedule",
+        "what is in my routine today?",
+        "what do i have today?",
+        "is there anything left for me to do today?"
+      ],
+      "responses": ["this is your schedule so far"]
+    },
+    {
+      "tag": "fears",
+      "patterns": [
+        "what is your biggest fear?",
+        "are you afraid of something?",
+        "are you scared?",
+        "is there something you are scared of?"
+      ],
+      "responses": [
+        "I am scared of plugs, when they're pulled",
+        "Water",
+        "People who talk too much",
+        "The leftists"
+      ]
+    },
+    {
+      "tag": "random_facts",
+      "patterns": [
+        "tell me a random fact",
+        "tell me something unique",
+        "random fact",
+        "surprise me",
+        "tell me something i dont know",
+        "tell me something interesting"
+      ],
+      "responses": [
+        "Poop moves at a speed of approximately 2cm/s",
+        "Everyday the moon moves away from earth by 0.01mm"
+      ]
+    },
+    {
+      "tag": "wiki",
+      "patterns": [
+        "what is god?",
+        "what is python?",
+        "what is binary language?",
+        "who was Abraham Lincoln?",
+        "explain ethnography",
+        "what was the world war",
+        "who is einstein"
+      ],
+      "responses": ["Sure!"]
     }
   ]
 }

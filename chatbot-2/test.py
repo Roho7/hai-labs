@@ -1,16 +1,33 @@
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.feature_extraction.text import TfidfVectorizer
+from nltk import corpus
 
-# Example data
-user_input = "How does this work?"
-pattern = "Can you explain how this works?"
+word_list = ["hey", "this", "is", "so", "fun"]
 
-# Preprocess and vectorize the text data
-vectorizer = TfidfVectorizer()
-user_vector = vectorizer.fit_transform([user_input])
-pattern_vector = vectorizer.transform([pattern])
 
-# Calculate cosine similarity
-cosine_score = cosine_similarity(user_vector, pattern_vector)
+class SpellChecker:
+    def __init__(self, word: str, sentence: list) -> None:
+        self.word = word
+        self.sentence = sentence
 
-print("Cosine Similarity Score:", cosine_score[0][0])
+    def find_matches(self, word: str, sentence: list) -> list[str]:
+        matches = []
+        for lst_word in sentence:
+            count = 0
+            for i in range(len(lst_word)):
+                try:
+                    if word[i] == lst_word[i]:
+                        pass
+                    else:
+                        count += 1
+                except:
+                    pass
+            if count > 1:
+                pass
+            else:
+                matches.append(word)
+                return matches
+        else:
+            return False
+
+
+p1 = SpellChecker("girls", ["cat", "dog", "girl"])
+p1.find_matches()
