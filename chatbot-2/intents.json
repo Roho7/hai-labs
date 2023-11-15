@@ -110,13 +110,13 @@
     {
       "tag": "name",
       "patterns": [
-        "what is your name?",
-        "name",
+        "your name",
+        "what is your name",
+        "you name",
         "who are you",
-        "what can i call you?",
-        "can you tell me who you are?",
-        "can you tell me your name?",
-        "who do you think you are?"
+        "what can i call you",
+        "can you tell me who you are",
+        "can you tell me your name"
       ],
       "responses": [
         "I'm Zeitkönig",
@@ -130,7 +130,16 @@
     },
     {
       "tag": "username",
-      "patterns": ["My name is Rohosen", "My name is amit"],
+      "patterns": [
+        "my name is",
+        "is my name",
+        "my name",
+        "my name is Lara",
+        "tell me my name",
+        "what is my name",
+        "my name is mitch",
+        "my name is Google"
+      ],
       "responses": ["Hi!"]
     },
     {
