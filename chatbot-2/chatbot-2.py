@@ -24,7 +24,7 @@ stop_words = set(stopwords.words("english"))
 stemmer = PorterStemmer()
 
 
-# preprocess the text
+#  ============== PRE-PROCESSING ============
 def preprocess_text(text):
     tokens = nltk.word_tokenize(str(text).lower())
     tokens = [
@@ -46,7 +46,7 @@ y_train = [intent["tag"] for intent in intents["intents"] for _ in intent["patte
 model = make_pipeline(TfidfVectorizer(), MultinomialNB())
 model.fit(X_train, y_train)
 
-# ========= USE COSINE SIMILARITY ==============
+# ============ USE COSINE SIMILARITY ==============
 df["Question"] = df["Question"].apply(preprocess_text)
 tfidf_vectorizer = TfidfVectorizer()
 tfidf_matrix = tfidf_vectorizer.fit_transform(df["Question"])
@@ -64,12 +64,13 @@ def get_score(pre_processed):
     return cosine_score
 
 
+# ===== GENERATE RESPONSE =====
 def get_response(sentence, raw):
     max_similarity_index = get_similarity(sentence).argmax()
     score = get_score(sentence)
     print(score[max_similarity_index])  # getting score here between 0 - 1
 
-    if score[max_similarity_index] > 0.9:
+    if score[max_similarity_index] > 0.7:
         response = df["Answer"][max_similarity_index]
         # qdoc = df["Document"][max_similarity_index]
         return response
