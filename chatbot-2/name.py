@@ -9,9 +9,11 @@ def get_username(sentence):
     words = nltk.word_tokenize(sentence)
     tagged_sent = pos_tag(words)
     proper_nouns = [word for word, tag in tagged_sent if tag == "NNP"]
-    question_words = [word for word, tag in tagged_sent if tag == "WP"]
+    question_words = [
+        word for word, tag in tagged_sent if tag == "WP" or word in ["whats"]
+    ]
     if question_words:
-        print(name)
+        # print(name)
         if len(name) > 0:
             return f"Your name is {name[0]}"
         else:
@@ -20,5 +22,7 @@ def get_username(sentence):
         if proper_nouns:
             name.insert(0, proper_nouns[0])
             return f"Hi {name[0]}!"
+        else:
+            return "Please capitalize your name for me. :("
     except:
         return f"Capitalize your name please"

@@ -72,7 +72,10 @@ def get_response(sentence, raw):
 
     if score[max_similarity_index] > 0.7:
         response = df["Answer"][max_similarity_index]
-        # qdoc = df["Document"][max_similarity_index]
+        qdoc = df["Document"][max_similarity_index]
+        if qdoc == "username":
+            result = get_username(raw)
+            return result
         return response
     else:
         predicted_intent = model.predict([pre_processed])[0]
@@ -104,7 +107,7 @@ def get_response(sentence, raw):
 
 
 while True:
-    user_input = input("Ask a question: ")
+    user_input = input("You: ")
     pre_processed = preprocess_text(user_input)
 
     response = get_response(pre_processed, user_input)

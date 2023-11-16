@@ -22,11 +22,13 @@
       ]
     },
     {
-      "tag": "small-talk",
+      "tag": "small_talk",
       "patterns": [
         "whats up?",
         "what up",
         "how is life?",
+        "how are you?",
+        "how are you doing",
         "how is everything?",
         "how is it hanging?"
       ],
@@ -73,7 +75,7 @@
       ]
     },
     {
-      "tag": "well-being",
+      "tag": "well_being",
       "patterns": [
         "how are you?",
         "how are you doing?",
@@ -113,8 +115,8 @@
         "your name",
         "what is your name",
         "you name",
-        "who are you",
-        "what can i call you",
+        "who are you name",
+        "what can i call you name",
         "can you tell me who you are",
         "can you tell me your name"
       ],
@@ -151,8 +153,7 @@
         "do you know who built you?",
         "do you have any parents?",
         "who is your father?",
-        "who is your mother?",
-        "who made you?"
+        "who is your mother?"
       ],
       "responses": [
         "I was build by a forgettable nerd",
@@ -176,19 +177,15 @@
         "i am not your bitch",
         "i am Zeitkönig, the king of time, not your mom's pet",
         "I am not a joker",
-        "just fuck off man"
+        "get lost"
       ]
     },
     {
       "tag": "weather",
       "patterns": [
-        "rain today?",
         "weather today?",
-        "what is the weather like today?",
-        "tell me the weather today",
         "what is the temperature at Kolkata today?",
         "how is the weather in London?",
-        "what is the weather like right now?",
         "weather in london right now",
         "temperature in italy"
       ],
@@ -201,7 +198,14 @@
     },
     {
       "tag": "angry",
-      "patterns": ["idiot", "shut the fuck up", "you are horrible", "you suck"],
+      "patterns": [
+        "idiot",
+        "shut the fuck up",
+        "horrible",
+        "you suck",
+        "stupid",
+        "baka"
+      ],
       "responses": [
         "i am sorry, you are better than me",
         "my maker was on drugs when he built me",
@@ -233,14 +237,11 @@
       "tag": "add_task",
       "patterns": [
         "add shopping at 5 o'clock",
-        "add taking out mom at 3pm",
         "add cooking at 1",
         "add forgetting the world at 5am",
         "add cooking at 4pm",
-        "add groceries at 3pm",
         "add going to the gym at 4pm",
-        "add dancing at 4 oclock",
-        "add designing at 5 oclock"
+        "add designing at 5oclock"
       ],
       "responses": [
         "sure, done",
@@ -262,14 +263,10 @@
     {
       "tag": "how_to",
       "patterns": [
-        "add this to my day",
-        "add cooking in the evening",
+        "add this to that",
         "remind me to cook at night",
-        "remind me to do this",
         "how do i add tasks?",
-        "how do i remove tasks?",
         "how can i add events?",
-        "how do add stuff?",
         "can i add stuff?",
         "correct way to add tasks"
       ],
@@ -297,6 +294,7 @@
         "what is your biggest fear?",
         "are you afraid of something?",
         "are you scared?",
+        "what are you afraid of",
         "is there something you are scared of?"
       ],
       "responses": [

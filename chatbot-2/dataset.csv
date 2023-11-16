@@ -420,7 +420,6 @@ Q418,what kind of cut is tri tip,The tri-tip is a cut of beef from the bottom si
 Q419,what kind of cut is tri tip,"It is a small triangular muscle , usually 1.5 to 2.5 lbs. (675 to 1,150g) per side of beef.",Tri-tip,
 Q420,what county is willmar mn in?,"Willmar is a city in, and the county seat of, Kandiyohi County , Minnesota , United States .","Willmar, Minnesota",
 Q421,what kind of company is Microsoft?,"Microsoft Corporation is an American multinational software corporation headquartered in Redmond , Washington that develops, manufactures, licenses, and supports a wide range of products and services related to computing .",Microsoft,
-Q422,how does weather happen,Weather is driven by air pressure (temperature and moisture) differences between one place and another.,Weather,
 Q423,how many countries have english as an official language,"In 2012, there were 88 states in total (60 sovereign states and 28 non-sovereign states).",List of countries where English is an official language,
 Q424,what countries are in cono sur,"Although geographically this includes Southern and part of Southeast ( São Paulo ) of Brazil , in terms of political geography the Southern cone has traditionally comprised Argentina , Chile , Paraguay , and Uruguay .",Southern Cone,
 Q425,what countries are in cono sur,"In the narrowest sense, it only covers Argentina , Chile and Uruguay , bounded on the north by the states of Brazil, Paraguay, Bolivia and Peru, on the west by the Pacific Ocean, and south to the junction between the Pacific and Atlantic Oceans, which it is the closest continental area of Antarctica (1000 km).",Southern Cone,
@@ -1472,8 +1471,16 @@ Q1470,what is the average american income,"U.S. median household income fell fro
 Q1471,When was Apple Computer founded,"The company was founded on April 1, 1976, and incorporated as Apple Computer, Inc. on January 3, 1977.",Apple Inc.,
 Q1472,what is section eight housing,"Section 8 of the Housing Act of 1937 (), often simply known as Section 8, as repeatedly amended, authorizes the payment of rental housing assistance to private landlords on behalf of approximately 3.1 million low-income households.",Section 8 (housing),
 Q1473,what is section eight housing,"It operates through several programs, the largest of which, the Housing Choice Voucher program, pays a large portion of the rents and utilities of about 2.1 million households.",Section 8 (housing),
-Q1474,idiot,"Hey, thats rude!",angry,
-Q1475,stupid,"I'm still learning",angry,
+Q1474,what can you do,"I can manage your life, tell you the weather, much more",small_talk
+Q1475,what is your power,"I can manage your life, tell you the weather and your schedule",small_talk
+Q1476,how are you,"I'm good!",small_talk,
+Q1477,how are you doing,"I'm doing great",small_talk,
+Q1478,you alright?,"I'm great",small_talk,
+Q1481,what do i call you,"My name is Zeitkonig",small_talk,
+Q1482,who are you,"My name is Zeitkonig",small_talk,
+
+
+
 
 
 
