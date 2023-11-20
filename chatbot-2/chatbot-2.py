@@ -16,7 +16,7 @@ from name import get_username
 lemmatizer = WordNetLemmatizer()
 
 
-df = pd.read_csv("chatbot-2/dataset.csv")
+df = pd.read_csv("chatbot-2/dataset2.csv")
 vocab = json.loads(open("chatbot-2/intents.json").read())
 intents = json.loads(open("chatbot-2/intents.json").read())
 
@@ -75,6 +75,11 @@ def get_response(sentence, raw):
         qdoc = df["Document"][max_similarity_index]
         if qdoc == "username":
             result = get_username(raw)
+            return result
+        if qdoc == "add_task":
+            add_task(raw)
+        if qdoc == "show_task":
+            result = show_tasks()
             return result
         return response
     else:
