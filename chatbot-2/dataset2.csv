@@ -1,40 +1,39 @@
-QuestionID,Question,Answer,Document,
-Q1,add dancing at 9pm,sure done!,add_task,
-Q2,add grocery shopping at 6am,sure done!,add_task,
-Q3,add burshing teeth at 10am,sure done!,add_task,
-Q4,add do assignments at 11am,sure done!,add_task,
-Q5,Add going to the market at 8,sure done!,add_task,
-,Add do homework at 4pm,sure done!,add_task,
-,show me my tasks,,show_task,
-,what is in my day,,show_task,
-,show me my schedule,,show_task,
-,What does my day look like,,show_task,
-,Show me my timetable ,,show_task,
-,Show me my tasks,,show_task,
-,Tell me about my day,,show_task,
-,What do I have to do today,,show_task,
-,what can you do,I can manage your life,capabilites,
-,what is your purpose,I can keep track of your tasks,capabilites,
-,what is your power,I can manage your time,capabilites,
-,show me what you can do,I can help you manage tasks,capabilites,
-,how do i add tasks?,"to add tasks, type something like: 'Add [task] at [time]'",how_to,
-,how do i add events?,"to add tasks, type something like: 'Add [task] at [time]'",how_to,
-,how can i add stuff,type something like: 'Add [task] at [time]',how_to,
-,how to add tasks,"to add tasks, type something like: 'Add [task] at [time]'",how_to,
-,delete brushing teeth from my day,,remove_tasks,
-,remove brushing teeth from my day,,remove_tasks,
-,cancel cooking from my schedule,,remove_tasks,
-,Cancel going to shopping from today,,remove_tasks,
-,what is my name,,username,
-,can you tell me my name,,username,
-,do you remember my name?,,username,
-,what was my name?,,username,
-,do you know my name,,username,
-,my name is Rosie,,username,
-,James is my name,,username,
-,my name is Alex,,username,
-,my name is George,,username,
-,my name is Ram,,username,
-,my name is Noel,,username,
-,my name is Jerry,,username,
-,my name is Jesus,,username,
+QuestionID,Question,Answer,Document
+Q1,add dancing at 9pm,sure done!,add_task
+Q2,add grocery shopping at 6am,sure done!,add_task
+Q3,add burshing teeth at 10am,sure done!,add_task
+Q4,add do assignments at 11am,sure done!,add_task
+Q5,Add going to the market at 8,sure done!,add_task
+Q6,Add do homework at 4pm,sure done!,add_task
+Q7,show me my tasks,,show_task
+Q8,what is in my day,,show_task
+Q9,show me my schedule,,show_task
+Q10,What does my day look like,,show_task
+Q11,Show me my timetable ,,show_task
+Q12,Show me my tasks,,show_task
+Q13,Tell me about my day,,show_task
+Q14,What do I have to do today,,show_task
+Q15,what can you do,I can manage your life,capabilites
+Q16,what is your purpose,I can keep track of your tasks,capabilites
+Q17,what is your power,I can manage your time,capabilites
+Q18,show me what you can do,I can help you manage tasks,capabilites
+Q19,how do i add tasks?,"to add tasks, type something like: 'Add [task] at [time]'",how_to
+Q20,how do i add events?,"to add tasks, type something like: 'Add [task] at [time]'",how_to
+Q21,how can i add stuff,type something like: 'Add [task] at [time]',how_to
+Q22,how to add tasks,"to add tasks, type something like: 'Add [task] at [time]'",how_to
+Q23,delete brushing teeth from my day,,remove_tasks
+Q24,remove brushing teeth from my day,,remove_tasks
+Q25,cancel cooking from my schedule,,remove_tasks
+Q26,Cancel going to shopping from today,,remove_tasks
+Q27,what is my name,,username
+Q28,can you tell me my name,,username
+Q29,do you remember my name?,,username
+Q30,what was my name?,,username
+Q31,do you know my name,,username
+Q32,my name is Rosie,,username
+Q33,James is my name,,username
+Q34,my name is Alex,,username
+Q35,what is your name,My name is Zeitkonig,name
+Q36,what do i call you,You can call me Zeitkonig,name
+Q37,what are you called,I’m better known as Zeitkonig,name
+Q38,who are you,I’m Zeitkonig,name
