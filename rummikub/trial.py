@@ -1,6 +1,6 @@
 import pygame
 import sys
-
+from main import WIN
 # Initialize Pygame
 pygame.init()
 
@@ -24,7 +24,7 @@ class Button:
         self.font = pygame.font.Font(None, 36)
 
     def draw(self):
-        pygame.draw.rect(screen, self.color, self.rect)
+        pygame.draw.rect(WIN, self.color, self.rect)
         text_surface = self.font.render(self.text, True, self.text_color)
         text_rect = text_surface.get_rect(center=self.rect.center)
         screen.blit(text_surface, text_rect)
@@ -40,27 +40,27 @@ button2 = Button(300, 200, 200, 100, red, "Click Me", white)
 
 
 # Main game loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:  # Left mouse button
-                mouse_pos = event.pos
-                if button.is_clicked(mouse_pos):
-                    print("Button clicked!")
+# running = True
+# while running:
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             running = False
+#         elif event.type == pygame.MOUSEBUTTONDOWN:
+#             if event.button == 1:  # Left mouse button
+#                 mouse_pos = event.pos
+#                 if button.is_clicked(mouse_pos):
+#                     print("Button clicked!")
 
-    # Fill the background with white
-    screen.fill(white)
+#     # Fill the background with white
+#     screen.fill(white)
 
-    # Draw the button
-    button.draw()
-    button2.draw()
+#     # Draw the button
+#     button.draw()
+#     button2.draw()
 
-    # Update the display
-    pygame.display.flip()
+#     # Update the display
+#     pygame.display.flip()
 
-# Quit Pygame
-pygame.quit()
-sys.exit()
+# # Quit Pygame
+# pygame.quit()
+# sys.exit()
