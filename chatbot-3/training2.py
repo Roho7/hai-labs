@@ -66,7 +66,7 @@ print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
 joblib.dump(model, "neuralninetut/chatbot_model.joblib")
 
 # Convert the joblib file to an h5 file
-with h5py.File("neuralninetut/chatbot_model.h5", "w") as hf:
-    joblib.dump(model, hf)
+# with h5py.File("neuralninetut/chatbot_model.h5", "w") as hf:
+# joblib.dump(model, hf)
 
 print("Done")
