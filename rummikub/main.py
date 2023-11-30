@@ -5,7 +5,7 @@ import random
 import copy
 from movechecker import *
 
-WIDTH, HEIGHT = 1080, 750
+WIDTH, HEIGHT = 1100, 750
 MARGIN = WIDTH//10
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Rummikub")
@@ -38,6 +38,8 @@ BLOCK_COLORS = [RED, GREEN, BLACK, BLUE, YELLOW]
 all_tiles = []
 player_tiles = []
 opponent_tiles = []
+opponent2_tiles = []
+opponent3_tiles = []
 def deal_table():
     for o, n in enumerate(BLOCK_ARRAY):
         for j in BLOCK_COLORS:
@@ -50,8 +52,16 @@ def deal_table():
         all_tiles.remove(all_tiles[i])
     
     for j in range(14):
-        opponent_tiles.append(all_tiles[i])
-        all_tiles.remove(all_tiles[i])
+        opponent_tiles.append(all_tiles[j])
+        all_tiles.remove(all_tiles[j])
+
+    for k in range(14):
+        opponent2_tiles.append(all_tiles[k])
+        all_tiles.remove(all_tiles[k])
+
+    for l in range(14):
+        opponent3_tiles.append(all_tiles[l])
+        all_tiles.remove(all_tiles[l])
 
 
 
@@ -149,8 +159,8 @@ class Messages():
     
 
 class Opponent():
-    def __init__(self, turn_count):
-        self.blocks = opponent_tiles
+    def __init__(self, turn_count, opp_tiles):
+        self.blocks = opp_tiles
         self.chosen_blocks = []
         self.move = 0
         self.return_list = []
@@ -194,7 +204,11 @@ class Opponent():
                         self.chosen_blocks.append(self.blocks[i+1])
                         self.chosen_blocks.append(self.blocks[i])
                         global opponent_tiles 
+                        global opponent2_tiles 
+                        global opponent3_tiles 
                         opponent_tiles = [block for block in opponent_tiles if block[2] not in [chosen_block[2] for chosen_block in self.chosen_blocks]]
+                        opponent2_tiles = [block for block in opponent2_tiles if block[2] not in [chosen_block[2] for chosen_block in self.chosen_blocks]]
+                        opponent3_tiles = [block for block in opponent3_tiles if block[2] not in [chosen_block[2] for chosen_block in self.chosen_blocks]]
                         self.move += 1
                         print("opponent played", self.blocks)
                         return self.chosen_blocks
@@ -299,6 +313,7 @@ def modify_board(chosen_blocks, selected_list, main_game_board):
 def main():
     clock = pygame.time.Clock()
     run = True
+    opponent_arrays = [opponent_tiles, opponent2_tiles, opponent3_tiles]
     pool_draw_counter = 0
     turn_count = 0
     deck_blocks_d = []
@@ -324,16 +339,17 @@ def main():
                     if button.is_clicked(mouse_pos):
                         # drawing from pool
                         pool_draw_counter +=1
-                        turn_count += 1
                         player_tiles.append(all_tiles[0])
                         deck_blocks_d.append(Block(MARGIN + 50 * pool_draw_counter, 610, all_tiles[0][2], all_tiles[0][0], all_tiles[0][1]))
                         all_tiles.remove(all_tiles[0])
-                        # opponent move
-                        opponent_blocks = Opponent(turn_count).deal_tiles()
-                        if opponent_blocks:
-                            if add_tiles_to_main_board(opponent_blocks, main_game_board, chosen_blocks_d, turn_count):
-                                add_tiles_to_display(main_game_board, main_game_board_d, 0, True) 
                         turn_count += 1
+                        # opponents move
+                        for op_blocks in opponent_arrays:
+                            opponent_blocks = Opponent(turn_count, op_blocks).deal_tiles()
+                            if opponent_blocks:
+                                if add_tiles_to_main_board(op_blocks, main_game_board, chosen_blocks_d, turn_count):
+                                    add_tiles_to_display(main_game_board, main_game_board_d, 0, True) 
+                            turn_count += 1
                         print(turn_count)
 
 # =========== PLAY BUTTON ===========
@@ -341,12 +357,13 @@ def main():
                         if add_tiles_to_main_board(chosen_blocks, main_game_board, chosen_blocks_d, turn_count):
                             add_tiles_to_display(main_game_board, main_game_board_d, 0, True)  
                             turn_count += 1
-                            opponent_blocks = Opponent(turn_count).deal_tiles()
-                            if opponent_blocks:
-                                print("opponent isn't empty", opponent_blocks)
-                                if add_tiles_to_main_board(opponent_blocks, main_game_board, chosen_blocks_d, turn_count):
-                                    add_tiles_to_display(main_game_board, main_game_board_d, 0, True)
-                        turn_count += 1
+                            for op_blocks in opponent_arrays:
+                                opponent_blocks = Opponent(turn_count, op_blocks).deal_tiles()
+                                if opponent_blocks:
+                                    if add_tiles_to_main_board(op_blocks, main_game_board, chosen_blocks_d, turn_count):
+                                        add_tiles_to_display(main_game_board, main_game_board_d, 0, True) 
+                                turn_count += 1
+                        print(turn_count)
                         print("MAIN BOARD", main_game_board)
 
 # =========== BLOCK CLICKS ============
@@ -382,12 +399,15 @@ def main():
                         if new_mod_blocks != []:
                             if add_tiles_to_main_board(new_mod_blocks, main_game_board, chosen_blocks_d, turn_count):
                                 add_tiles_to_display(main_game_board, main_game_board_d, 0, True)
+                                selected_board_blocks = []
                                 turn_count += 1
-                                opponent_blocks = Opponent(turn_count).deal_tiles()
-                                if opponent_blocks:
-                                    print("opponent isn't empty", opponent_blocks)
-                                    if add_tiles_to_main_board(opponent_blocks, main_game_board, chosen_blocks_d, turn_count):
-                                        add_tiles_to_display(main_game_board, main_game_board_d, 0, True)
+                                for op_blocks in opponent_arrays:
+                                    opponent_blocks = Opponent(turn_count, op_blocks).deal_tiles()
+                                    if opponent_blocks:
+                                        if add_tiles_to_main_board(op_blocks, main_game_board, chosen_blocks_d, turn_count):
+                                            add_tiles_to_display(main_game_board, main_game_board_d, 0, True) 
+                                    turn_count += 1
+                                print(turn_count)
 
 
         # RENDER OTHER ELEMENTS

@@ -12,16 +12,17 @@ from nltk import pos_tag
 from nltk.tree import Tree
 from joblib import load
 
+
 from tensorflow.keras.models import load_model
 
 
 lemmatizer = WordNetLemmatizer()
-intents = json.loads(open("neuralninetut/intents.json").read())
+intents = json.loads(open("chatbot-3/intents.json").read())
 
-words = pickle.load(open("neuralninetut/words.pkl", "rb"))
-classes = pickle.load(open("neuralninetut/classes.pkl", "rb"))
-model = load_model("neuralninetut/chatbot_model.h5")
-# model2 = load("neuralninetut/chatbot_model.joblib")
+words = pickle.load(open("chatbot-3/words.pkl", "rb"))
+classes = pickle.load(open("chatbot-3/classes.pkl", "rb"))
+# model = load_model("chatbot-3/chatbot_model.h5")
+model2 = load("chatbot-3/chatbot_model.joblib")
 
 tasks = []
 
@@ -238,16 +239,16 @@ def get_response(intents_list, intents_json, message):
 
 print("chatbot is running")
 
-# while True:
-#     message = input("You: ")
-#     ints = predict_class(message)
-#     res = get_response(ints, intents, message)
-#     # clean = clean_up_sentence(message)
-#     # lem = [stemmer.stem(item) for item in clean]
-#     print(f"Zeitkönig:", res)
+while True:
+    message = input("You: ")
+    ints = predict_class(message)
+    res = get_response(ints, intents, message)
+    # clean = clean_up_sentence(message)
+    # lem = [stemmer.stem(item) for item in clean]
+    print(f"Zeitkönig:", res)
 
 
-def start_bot(input):
-    ints = predict_class(input)
-    res = get_response(ints, intents, input)
-    return res
+# def start_bot(input):
+#     ints = predict_class(input)
+#     res = get_response(ints, intents, input)
+#     return res
