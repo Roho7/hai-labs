@@ -2,6 +2,17 @@ import nltk
 from cleanup import clean_up_sentence
 
 tasks = []
+affirmations = [
+    "yes",
+    "ya",
+    "si",
+    "yesh",
+    "yeah",
+    "sure",
+    "right",
+    "correct",
+    "thats right",
+]
 
 
 def add_task(sentence):
@@ -22,8 +33,12 @@ def add_task(sentence):
     if time == "":
         return "Okay, but you need to tell me when you want to do it. Say something like: 'Add [task] at [time]"
     if task and time:
-        tasks.append({"task": task, "time": time})
-        return tasks
+        confirm = input(f"You want to add {task} at {time}, is that correct? ")
+        if confirm.lower() in affirmations:
+            tasks.append({"task": task, "time": time})
+            return f"Okay {task} added at {time}"
+        else:
+            return "Okay, try that again"
     else:
         print("Input format is not valid.")
 

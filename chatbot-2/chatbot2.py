@@ -12,6 +12,7 @@ from nltk.stem import WordNetLemmatizer
 from tasks import add_task, show_tasks, remove_tasks
 from weather import get_weather
 from name import get_username
+from wiki import get_wiki
 
 lemmatizer = WordNetLemmatizer()
 
@@ -77,9 +78,13 @@ def get_response(sentence, raw):
             result = get_username(raw)
             return result
         if qdoc == "add_task":
-            add_task(raw)
+            result = add_task(raw)
+            return result
         if qdoc == "show_task":
             result = show_tasks()
+            return result
+        if qdoc == "get_wiki":
+            result == get_wiki(raw)
             return result
         return response
     else:
@@ -91,16 +96,17 @@ def get_response(sentence, raw):
             responses = intent_responses[predicted_intent]
             response = random.choice(responses)
             if predicted_intent == "add_task":
-                add_task(raw)
+                result = add_task(raw)
+                return result
             if predicted_intent == "show_task":
                 result = show_tasks()
                 return result
             if predicted_intent == "remove_task":
                 result = remove_tasks(raw)
                 return result
-            # if predicted_intent == "wiki":
-            #     result = get_wiki(raw)
-            #     return result
+            if predicted_intent == "wiki":
+                result = get_wiki(raw)
+                return result
             if predicted_intent == "weather":
                 result = get_weather(raw)
                 return result

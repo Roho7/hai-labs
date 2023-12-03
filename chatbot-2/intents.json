@@ -243,11 +243,7 @@
         "add going to the gym at 4pm",
         "add designing at 5oclock"
       ],
-      "responses": [
-        "sure, done",
-        "item added to your schedule",
-        "i've added it, want to add another?"
-      ]
+      "responses": [""]
     },
     {
       "tag": "remove_task",

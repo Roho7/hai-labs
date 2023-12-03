@@ -1,10 +1,10 @@
 QuestionID,Question,Answer,Document
-Q1,add dancing at 9pm,sure done!,add_task
-Q2,add grocery shopping at 6am,sure done!,add_task
-Q3,add burshing teeth at 10am,sure done!,add_task
-Q4,add do assignments at 11am,sure done!,add_task
-Q5,Add going to the market at 8,sure done!,add_task
-Q6,Add do homework at 4pm,sure done!,add_task
+Q1,add dancing at 9pm,,add_task
+Q2,add grocery shopping at 6am,,add_task
+Q3,add burshing teeth at 10am,,add_task
+Q4,add do assignments at 11am,,add_task
+Q5,Add going to the market at 8,,add_task
+Q6,Add do homework at 4pm,,add_task
 Q7,show me my tasks,,show_task
 Q8,what is in my day,,show_task
 Q9,show me my schedule,,show_task
@@ -37,3 +37,9 @@ Q35,what is your name,My name is Zeitkonig,name
 Q36,what do i call you,You can call me Zeitkonig,name
 Q37,what are you called,I’m better known as Zeitkonig,name
 Q38,who are you,I’m Zeitkonig,name
+Q39,you do,I can help you track your day,capabilites
+Q40,what is a cobra,,get_wiki
+Q41,what is quantum mechanics,,get_wiki
+Q42,what is pythong(programming language),,get_wiki
+Q43,what is finance,,get_wiki
+Q44,what is a marriage lisence,,get_wiki
