@@ -37,9 +37,13 @@ Q35,what is your name,My name is Zeitkonig,name
 Q36,what do i call you,You can call me Zeitkonig,name
 Q37,what are you called,I’m better known as Zeitkonig,name
 Q38,who are you,I’m Zeitkonig,name
-Q39,you do,I can help you track your day,capabilites
 Q40,what is a cobra,,get_wiki
 Q41,what is quantum mechanics,,get_wiki
-Q42,what is pythong(programming language),,get_wiki
+Q42,what is python(programming language),,get_wiki
 Q43,what is finance,,get_wiki
 Q44,what is a marriage lisence,,get_wiki
+Q45,what do i have at 5pm,hi,time_task
+Q46,what is at 4pm,hi,time_task
+Q47,show my task at 6pm,hi,time_task
+Q48,do i have anything at 5pm,hi,time_task
+Q49,do i have anything at 3pm,hi,time_task

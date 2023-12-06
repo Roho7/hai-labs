@@ -1,5 +1,7 @@
 import nltk
 from cleanup import clean_up_sentence
+from nltk import pos_tag
+
 
 tasks = []
 affirmations = [
@@ -32,7 +34,18 @@ def add_task(sentence):
 
     if time == "":
         return "Okay, but you need to tell me when you want to do it. Say something like: 'Add [task] at [time]"
+
     if task and time:
+        for i, item in enumerate(tasks):
+            if time == item["time"]:
+                confirm = input(
+                    f"You already have {item['task']} at {time}, are you sure you want to add {task}?"
+                )
+                if confirm.lower() in affirmations:
+                    tasks.append({"task": task, "time": time})
+                    return f"Okay {task} added at {time}"
+                else:
+                    return "Okay, try that again"
         confirm = input(f"You want to add {task} at {time}, is that correct? ")
         if confirm.lower() in affirmations:
             tasks.append({"task": task, "time": time})
@@ -78,3 +91,14 @@ def show_tasks():
             filtered = ", " + " ".join(message)
             output += filtered
     return output
+
+
+def time_task(raw):
+    words = nltk.word_tokenize(raw)
+    tagged = pos_tag(words)
+    time = [word for word, tag in tagged if tag == "CD"]
+    for index, item in enumerate(tasks):
+        if time[0] == item["time"]:
+            return f"You have {item['task']} at {time[0]}"
+
+    return f"No you don't have anything at {time[0]}"

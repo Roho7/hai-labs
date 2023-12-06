@@ -7,7 +7,6 @@
         "hey",
         "hi",
         "sup",
-        "you there?",
         "good morning",
         "good afternoon",
         "bro"
@@ -41,6 +40,15 @@
       ]
     },
     {
+      "tag": "time_task",
+      "patterns": [
+        "what do i have at 6pm",
+        "do i have anything at 3am",
+        "what is at 5pm"
+      ],
+      "responses": [""]
+    },
+    {
       "tag": "goodbye",
       "patterns": [
         "bye-bye",
@@ -65,33 +73,12 @@
         "are you conscious?",
         "can you feel?",
         "are you aware?",
-        "do you know yourself?",
-        "what are you?"
+        "do you know yourself?"
       ],
       "responses": [
         "i know i am a bot, thats about it",
         "i'm nothing but 0s and 1s",
         "to be or not to be..."
-      ]
-    },
-    {
-      "tag": "well_being",
-      "patterns": [
-        "how are you?",
-        "how are you doing?",
-        "everything good?",
-        "all good?",
-        "you good?",
-        "you alright?",
-        "are you okay?",
-        "are you fine?"
-      ],
-      "responses": [
-        "I am great, how are you?",
-        "I'm doing fine, how can i help you today?",
-        "I have no body, so i cannot be good or bad. What's up?",
-        "I'm fine. What can I do for you today?",
-        "I'm good. How can i help you?"
       ]
     },
     {
@@ -115,7 +102,6 @@
         "your name",
         "what is your name",
         "you name",
-        "who are you name",
         "what can i call you name",
         "can you tell me who you are",
         "can you tell me your name"
@@ -129,20 +115,6 @@
         "i am Zeitkönig, the king of time",
         "Zeitkönig is my name"
       ]
-    },
-    {
-      "tag": "username",
-      "patterns": [
-        "my name is",
-        "is my name",
-        "my name",
-        "my name is Lara",
-        "tell me my name",
-        "what is my name",
-        "my name is mitch",
-        "my name is Google"
-      ],
-      "responses": ["Hi!"]
     },
     {
       "tag": "family",
@@ -233,6 +205,7 @@
         "i am not into stupid people"
       ]
     },
+
     {
       "tag": "add_task",
       "patterns": [

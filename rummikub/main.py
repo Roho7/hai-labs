@@ -174,58 +174,74 @@ class Opponent():
     
     def sort_tiles(self):
         n = len(self.blocks)
-
         for i in range(n):
             for j in range(0, n - i - 1):
                 if self.blocks[j][0] < self.blocks[j + 1][0]:
                     self.blocks[j], self.blocks[j + 1] = self.blocks[j + 1], self.blocks[j]
         return self.blocks
+    
 
-    def deal_tiles(self):
+
+    def deal_tiles(self, op_block):
         self.chosen_blocks.clear()
         self.sort_tiles()
         max_sum = float('-inf')
         print("opponent is thinking")
         add_blocks = False
+
         for i in range(len(self.blocks)-2):
-
-            if (self.blocks[i][0] - 1 == self.blocks[i + 1][0] and self.blocks[i + 1][0] - 1 == self.blocks[i + 2][0] and str(self.blocks[i][1]) == str(self.blocks[i + 1][1]) and str(self.blocks[i + 1][1]) == str(self.blocks[i + 2][1])) or (self.blocks[i][0] == self.blocks[i + 2][0] and self.blocks[i][0] == self.blocks[i + 1][0] and self.blocks[i + 1][0] == self.blocks[i + 2][0]):
+            if (self.blocks[i][0] == self.blocks[i + 2][0] and self.blocks[i][0] == self.blocks[i + 1][0] and self.blocks[i + 1][0] == self.blocks[i + 2][0]) and (str(self.blocks[i][1]) != str(self.blocks[i+1][1]) and str(self.blocks[i+1][1]) != str(self.blocks[i+2][1]) and str(self.blocks[i][1]) != str(self.blocks[i+2][1])):
                 add_blocks = True
-
+            else:
+                sort_blocks = sorted(self.blocks, key=lambda x:x[1])
+                self.blocks = sort_blocks
+                if (self.blocks[i][0] - 1 == self.blocks[i+1][0] and self.blocks[i+1][0] - 1 == self.blocks[i+2][0]) and (self.blocks[i][1] == self.blocks[i+1][1] and self.blocks[i+1][1] == self.blocks[i+2][1]):
+                    add_blocks = True
+                
 
             if add_blocks == True:
                 print("presence of valid move")
                 current_sum = self.blocks[i][0] + self.blocks[i+1][0] + self.blocks[i+2][0]
                 if current_sum > max_sum:
                     max_sum = current_sum
-                    if max_sum < 30:
-                    # if max_sum < 30 and self.move == 0:÷
-                        self.blocks.append(mainboard.all_tiles[0])
-                        mainboard.all_tiles.remove(mainboard.all_tiles[0])
-                        self.chosen_blocks.clear()
-                        print("drew cards")
-                        Messages("Opponent drew tiles").normal()
-                        return []
-                    else:
-                        self.chosen_blocks.append(self.blocks[i+2])
-                        self.chosen_blocks.append(self.blocks[i+1])
-                        self.chosen_blocks.append(self.blocks[i])
-                        new_opponent1 = [block for block in mainboard.opponent_tiles if block[2] not in [chosen_block[2] for chosen_block in self.chosen_blocks]]
-                        mainboard.opponent_tiles = new_opponent1
-                        new_opponent2 = [block for block in mainboard.opponent2_tiles if block[2] not in [chosen_block[2] for chosen_block in self.chosen_blocks]]
-                        mainboard.opponent2_tiles = new_opponent2
-                        new_opponent3 = [block for block in mainboard.opponent3_tiles if block[2] not in [chosen_block[2] for chosen_block in self.chosen_blocks]]
-                        mainboard.opponent3_tiles = new_opponent3
-                        self.move += 1
-                        print("opponent played", "1", [block[2] for block in mainboard.opponent_tiles], "2",[block[2] for block in mainboard.opponent2_tiles], "3", [block[2] for block in mainboard.opponent3_tiles])
-                        return self.chosen_blocks
+                    # if max_sum < 30:
+                    # # if max_sum < 30 and self.move == 0:
+                    #     self.blocks.append(mainboard.all_tiles[0])
+                    #     mainboard.all_tiles.remove(mainboard.all_tiles[0])
+                    #     self.chosen_blocks.clear()
+                    #     print("drew cards")
+                    #     Messages("Opponent drew tiles").normal()
+                    #     return []
+                    # else:
+                    self.chosen_blocks.append(self.blocks[i+2])
+                    self.chosen_blocks.append(self.blocks[i+1])
+                    self.chosen_blocks.append(self.blocks[i])
+
+                    player_chosen = [block for block in mainboard.player_tiles if block[2] not in [chosen_block[2] for chosen_block in self.chosen_blocks]]
+                    mainboard.player_tiles.clear()
+                    mainboard.player_tiles.extend(player_chosen)
+                    new_opponent1 = [block for block in mainboard.opponent_tiles if block[2] not in [chosen_block[2] for chosen_block in self.chosen_blocks]]
+                    mainboard.opponent_tiles.clear()
+                    mainboard.opponent_tiles.extend(new_opponent1)
+                    new_opponent2 = [block for block in mainboard.opponent2_tiles if block[2] not in [chosen_block[2] for chosen_block in self.chosen_blocks]]
+                    mainboard.opponent2_tiles.clear()
+                    mainboard.opponent2_tiles.extend(new_opponent2)
+                    new_opponent3 = [block for block in mainboard.opponent3_tiles if block[2] not in [chosen_block[2] for chosen_block in self.chosen_blocks]]
+                    mainboard.opponent3_tiles.clear()
+                    mainboard.opponent3_tiles.extend(new_opponent3)
+                    self.move += 1
+                    print("opponent played", "1", [block[2] for block in mainboard.opponent_tiles], "2",[block[2] for block in mainboard.opponent2_tiles], "3", [block[2] for block in mainboard.opponent3_tiles])
+                    return self.chosen_blocks
             else:
                 self.blocks.append(mainboard.all_tiles[0])
                 mainboard.all_tiles.remove(mainboard.all_tiles[0])
                 self.chosen_blocks.clear()
                 print("drew cards")
                 Messages("Opponent drew tiles").normal()
-                return []
+                if op_block > 3:
+                    return False
+                else:
+                    return []
 
 
 
@@ -257,6 +273,7 @@ def add_tiles_to_display(logic_list, display_list, y_value, nested):
 button = Button(0, 200, 100, 50, RED, "Draw", WHITE)
 play_button = Button(WIDTH-100, 200, 100, 50, RED, "Play", WHITE)
 mod_button = Button(WIDTH-100, 300, 100, 50, RED, "Mod", WHITE)
+pfm_button = Button(WIDTH-100, 400, 100, 50, RED, "Play for me", WHITE)
 
 def check_tiles(chosen_blocks, block_sum):
     allowed = True # Start with True
@@ -265,7 +282,7 @@ def check_tiles(chosen_blocks, block_sum):
         current_block = chosen_blocks[i]
         next_block = chosen_blocks[i+1]
         block_sum += next_block[0]
-        if not ((current_block[0] + 1 == next_block[0] and str(current_block[1]) == str(next_block[1])) or (current_block[0] == next_block[0] and len([block[1] for block in chosen_blocks if str(block[1]) == str(current_block[1])]) == 1)):
+        if not ((current_block[0] + 1 == next_block[0] and str(current_block[1]) == str(next_block[1])) or (current_block[0] == next_block[0] and len([str(block[1]) for block in chosen_blocks if str(block[1]) == str(current_block[1])]) == 1)):
             allowed = False
             print("illegal tile found", [block for block in chosen_blocks if str(block[1]) == str(current_block[1])])
             break  # Break the loop as soon as a non-matching pair is found
@@ -356,7 +373,7 @@ def main():
                         # opponents move
                         for op_blocks in opponent_arrays:
                             opponent_blocks = []
-                            opponent_blocks = Opponent(turn_count, op_blocks).deal_tiles()
+                            opponent_blocks = Opponent(turn_count, op_blocks).deal_tiles(len(opponent_arrays))
                             if opponent_blocks:
                                 if add_tiles_to_main_board(opponent_blocks, main_game_board, chosen_blocks_d, turn_count):
                                     add_tiles_to_display(main_game_board, main_game_board_d, 0, True) 
@@ -370,7 +387,7 @@ def main():
                             turn_count += 1
                             for op_blocks in opponent_arrays:
                                 opponent_blocks = []
-                                opponent_blocks = Opponent(turn_count, op_blocks).deal_tiles()
+                                opponent_blocks = Opponent(turn_count, op_blocks).deal_tiles(len(opponent_arrays))
                                 if opponent_blocks:
                                     if add_tiles_to_main_board(opponent_blocks, main_game_board, chosen_blocks_d, turn_count):
                                         add_tiles_to_display(main_game_board, main_game_board_d, 0, True) 
@@ -415,12 +432,35 @@ def main():
                                 turn_count += 1
                                 for op_blocks in opponent_arrays:
                                     opponent_blocks = []
-                                    opponent_blocks = Opponent(turn_count, op_blocks).deal_tiles()
+                                    opponent_blocks = Opponent(turn_count, op_blocks).deal_tiles(len(opponent_arrays))
                                     if opponent_blocks:
                                         if add_tiles_to_main_board(opponent_blocks, main_game_board, chosen_blocks_d, turn_count):
                                             add_tiles_to_display(main_game_board, main_game_board_d, 0, True) 
                                     turn_count += 1
                                 print(turn_count)
+
+                    if pfm_button.is_clicked(mouse_pos):
+                        opponent_arrays.insert(0, mainboard.player_tiles)
+                        draw = False
+                        for op_blocks in opponent_arrays:
+                            opponent_blocks = []
+                            opponent_blocks = Opponent(turn_count, op_blocks).deal_tiles(len(opponent_arrays))
+                            if opponent_blocks:
+                                if add_tiles_to_main_board(opponent_blocks, main_game_board, chosen_blocks_d, turn_count):
+                                    add_tiles_to_display(main_game_board, main_game_board_d, 0, True) 
+                            elif opponent_blocks is False:
+                                draw = True
+                            turn_count += 1
+                        opponent_arrays.pop(0)
+                        if draw is True:
+                            pool_draw_counter +=1
+                            print("player tiles before", mainboard.player_tiles)
+                            mainboard.player_tiles.append(mainboard.all_tiles[0])
+                            print("player tiles after", mainboard.player_tiles)
+
+                            deck_blocks_d.append(Block(MARGIN + 50 * pool_draw_counter, 610, mainboard.all_tiles[0][2], mainboard.all_tiles[0][0], mainboard.all_tiles[0][1]))
+                            mainboard.all_tiles.remove(mainboard.all_tiles[0])
+                        
 
 
         # RENDER OTHER ELEMENTS
@@ -428,6 +468,7 @@ def main():
         button.draw()
         play_button.draw()
         mod_button.draw()
+        pfm_button.draw()
         for block in deck_blocks_d:
             block.draw()
         for block in main_game_board_d:

@@ -1,4 +1,5 @@
 import pandas as pd
+import string
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
@@ -9,7 +10,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
 from nltk.stem import WordNetLemmatizer
-from tasks import add_task, show_tasks, remove_tasks
+from tasks import add_task, show_tasks, remove_tasks, time_task
 from weather import get_weather
 from name import get_username
 from wiki import get_wiki
@@ -31,7 +32,10 @@ def preprocess_text(text):
     tokens = [
         stemmer.stem(token)
         for token in tokens
-        if token.isalpha() and token not in stop_words
+        if token.isalpha()
+        and token not in stop_words
+        and not token.isdigit()
+        and token not in string.punctuation
     ]
     return " ".join(tokens)
 
@@ -86,6 +90,9 @@ def get_response(sentence, raw):
         if qdoc == "get_wiki":
             result == get_wiki(raw)
             return result
+        if qdoc == "time_task":
+            result = time_task(raw)
+            return result
         return response
     else:
         predicted_intent = model.predict([pre_processed])[0]
@@ -100,6 +107,9 @@ def get_response(sentence, raw):
                 return result
             if predicted_intent == "show_task":
                 result = show_tasks()
+                return result
+            if predicted_intent == "time_task":
+                result = time_task(raw)
                 return result
             if predicted_intent == "remove_task":
                 result = remove_tasks(raw)
