@@ -3,8 +3,8 @@ Q1,add dancing at 9pm,,add_task
 Q2,add grocery shopping at 6am,,add_task
 Q3,add burshing teeth at 10am,,add_task
 Q4,add do assignments at 11am,,add_task
-Q5,Add going to the market at 8,,add_task
-Q6,Add do homework at 4pm,,add_task
+Q5,add going to the market at 8,,add_task
+Q6,add do homework at 4pm,,add_task
 Q7,show me my tasks,,show_task
 Q8,what is in my day,,show_task
 Q9,show me my schedule,,show_task

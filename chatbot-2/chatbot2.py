@@ -10,10 +10,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
 from nltk.stem import WordNetLemmatizer
-from tasks import add_task, show_tasks, remove_tasks, time_task
+from tasks import add_task, show_tasks, remove_tasks, time_task, shift_task
 from weather import get_weather
 from name import get_username
 from wiki import get_wiki
+from get_time import get_time
 
 lemmatizer = WordNetLemmatizer()
 
@@ -30,7 +31,7 @@ stemmer = PorterStemmer()
 def preprocess_text(text):
     tokens = nltk.word_tokenize(str(text).lower())
     tokens = [
-        stemmer.stem(token)
+        lemmatizer.lemmatize(token)
         for token in tokens
         if token.isalpha()
         and token not in stop_words
@@ -71,59 +72,65 @@ def get_score(pre_processed):
 
 # ===== GENERATE RESPONSE =====
 def get_response(sentence, raw):
-    max_similarity_index = get_similarity(sentence).argmax()
-    score = get_score(sentence)
-    print(score[max_similarity_index])  # getting score here between 0 - 1
+    # max_similarity_index = get_similarity(sentence).argmax()
+    # score = get_score(sentence)
+    # print(score[max_similarity_index])  # getting score here between 0 - 1
 
-    if score[max_similarity_index] > 0.7:
-        response = df["Answer"][max_similarity_index]
-        qdoc = df["Document"][max_similarity_index]
-        if qdoc == "username":
-            result = get_username(raw)
-            return result
-        if qdoc == "add_task":
+    # if score[max_similarity_index] > 0.7:
+    #     response = df["Answer"][max_similarity_index]
+    #     qdoc = df["Document"][max_similarity_index]
+    #     if qdoc == "username":
+    #         result = get_username(raw)
+    #         return result
+    #     if qdoc == "add_task":
+    #         result = add_task(raw)
+    #         return result
+    #     if qdoc == "show_task":
+    #         result = show_tasks()
+    #         return result
+    #     if qdoc == "get_wiki":
+    #         result == get_wiki(raw)
+    #         return result
+    #     if qdoc == "time_task":
+    #         result = time_task(raw)
+    #         return result
+    #     return response
+    # else:
+    predicted_intent = model.predict([pre_processed])[0]
+    intent_responses = {
+        intent["tag"]: intent["responses"] for intent in intents["intents"]
+    }
+    if predicted_intent in intent_responses:
+        responses = intent_responses[predicted_intent]
+        response = random.choice(responses)
+        if predicted_intent == "add_task":
             result = add_task(raw)
             return result
-        if qdoc == "show_task":
+        if predicted_intent == "show_task":
             result = show_tasks()
             return result
-        if qdoc == "get_wiki":
-            result == get_wiki(raw)
-            return result
-        if qdoc == "time_task":
+        if predicted_intent == "time_task":
             result = time_task(raw)
             return result
+        if predicted_intent == "remove_task":
+            result = remove_tasks(raw)
+            return result
+        if predicted_intent == "shift_task":
+            result = shift_task(raw)
+            return result
+        if predicted_intent == "wiki":
+            result = get_wiki(raw)
+            return result
+        if predicted_intent == "weather":
+            result = get_weather(raw)
+            return result
+        if predicted_intent == "username":
+            result = get_username(raw)
+            return result
+        if predicted_intent == "time":
+            result = get_time()
+            return result
         return response
-    else:
-        predicted_intent = model.predict([pre_processed])[0]
-        intent_responses = {
-            intent["tag"]: intent["responses"] for intent in intents["intents"]
-        }
-        if predicted_intent in intent_responses:
-            responses = intent_responses[predicted_intent]
-            response = random.choice(responses)
-            if predicted_intent == "add_task":
-                result = add_task(raw)
-                return result
-            if predicted_intent == "show_task":
-                result = show_tasks()
-                return result
-            if predicted_intent == "time_task":
-                result = time_task(raw)
-                return result
-            if predicted_intent == "remove_task":
-                result = remove_tasks(raw)
-                return result
-            if predicted_intent == "wiki":
-                result = get_wiki(raw)
-                return result
-            if predicted_intent == "weather":
-                result = get_weather(raw)
-                return result
-            if predicted_intent == "username":
-                result = get_username(raw)
-                return result
-            return response
     return None
 
 

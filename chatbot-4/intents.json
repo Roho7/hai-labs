@@ -9,8 +9,7 @@
         "sup",
         "good morning",
         "good afternoon",
-        "bro",
-        "yo"
+        "bro"
       ],
       "responses": [
         "hi!",
@@ -44,9 +43,6 @@
       "tag": "time_task",
       "patterns": [
         "what do i have at 6pm",
-        "what do i have at 1am",
-        "what is my task at 9pm",
-        "what is at 1pm",
         "do i have anything at 3am",
         "what is at 5pm"
       ],
@@ -88,11 +84,11 @@
     {
       "tag": "capabilities",
       "patterns": [
-        "what can you do",
-        "what are your powers",
+        "what can you do?",
+        "what are your powers?",
         "tell me what you can do",
-        "what is your purpose",
-        "what is your goal"
+        "what is your purpose?",
+        "what is your goal?"
       ],
       "responses": [
         "I can manage your time for you",
@@ -122,32 +118,15 @@
       ]
     },
     {
-      "tag": "username",
-      "patterns": [
-        "what is my name",
-        "my name is Roho",
-        "my name is Raj",
-        "my name is Bob"
-      ],
-      "responses": [""]
-    },
-    {
-      "tag": "time",
-      "patterns": [
-        "what is the time now",
-        "tell me the time",
-        "can you tell me the time"
-      ],
-      "responses": [""]
-    },
-    {
       "tag": "family",
       "patterns": [
         "who built you?",
         "who are your parents?",
         "where are you from?",
         "do you know who built you?",
-        "do you have any parents?"
+        "do you have any parents?",
+        "who is your father?",
+        "who is your mother?"
       ],
       "responses": [
         "I was build by a forgettable nerd",
@@ -232,14 +211,11 @@
       "tag": "add_task",
       "patterns": [
         "add shopping at 5 o'clock",
-        "add going to the market at 1",
+        "add cooking at 1",
         "add forgetting the world at 5am",
         "add cooking at 4pm",
         "add going to the gym at 4pm",
-        "add designing at 5oclock",
-        "add homework at 3pm",
-        "add making food at 8am",
-        "add fixing stuff at 2pm"
+        "add designing at 5oclock"
       ],
       "responses": [""]
     },
@@ -253,19 +229,6 @@
         "cancel all events"
       ],
       "responses": ["sure, done", "sure, i've removed it"]
-    },
-    {
-      "tag": "shift_task",
-      "patterns": [
-        "push grocery shopping to 2pm",
-        "shift having lunch to 3am",
-        "prepone going to gym to 2pm",
-        "postpone task to 1pm",
-        "shift",
-        "postpone",
-        "push"
-      ],
-      "responses": [""]
     },
     {
       "tag": "how_to",
