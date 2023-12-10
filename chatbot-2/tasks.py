@@ -1,5 +1,5 @@
 import nltk
-from cleanup import clean_up_sentence
+from cleanup import clean_up_sentence, stem_sentence
 from nltk import pos_tag
 from datetime import datetime
 
@@ -25,7 +25,7 @@ def fix_time(raw):
         return time
     except:
         right_time = input(
-            f"Bot: The time wasn't quite clear, is it {raw}AM or {raw}PM?\nYou: "
+            f"Zeitkonig: The time wasn't quite clear, is it {raw}AM or {raw}PM?\nYou: "
         )
         if right_time.lower() == "am" or right_time.lower() == "pm":
             right_time = raw + right_time
@@ -57,7 +57,7 @@ def add_task(sentence):
         for i, item in enumerate(tasks):
             if time == item["time"]:
                 confirm = input(
-                    f"Bot: You already have {item['task']} at {time}, are you sure you want to add {task}?\nYou: "
+                    f"Zeitkonig: You already have {item['task']} at {time}, are you sure you want to add {task}?\nYou: "
                 )
                 if confirm.lower() in affirmations:
                     tasks.append({"task": task, "time": time})
@@ -65,7 +65,7 @@ def add_task(sentence):
                 else:
                     return "Okay, try that again"
         confirm = input(
-            f"Bot: You want to add {task} at {time}, is that correct?\nYou: "
+            f"Zeitkonig: You want to add {task} at {time}, is that correct?\nYou: "
         )
         if confirm.lower() in affirmations:
             tasks.append({"task": task, "time": time})
@@ -77,14 +77,27 @@ def add_task(sentence):
 
 
 def remove_tasks(sentence):
-    input_list = nltk.word_tokenize(sentence)
-    bow = input_list[1]
+    if tasks == []:
+        return "You have nothing in your schedule yet."
+    words = nltk.word_tokenize(sentence)
+    tagged = pos_tag(words)
+    task = []
+    for i, (word, pos) in enumerate(tagged):
+        if word in ["cancel", "remove", "delete"]:
+            pass
+        elif word == "from":
+            break
+        else:
+            task.append(word)
+    if task:
+        task = " ".join(task)
     for item in tasks:
-        if item["task"] == bow:
+        print(stem_sentence(item["task"]), stem_sentence(task))
+        if stem_sentence(item["task"]) == stem_sentence(task):
             tasks.remove(item)
             other_tasks = show_tasks()
             return f"{item['task']} removed from your day. {other_tasks}"
-    if bow not in tasks:
+    if task not in tasks:
         return "Item not found"
 
 
@@ -119,23 +132,26 @@ def time_task(raw):
     time = [word for word, tag in tagged if tag == "CD"]
     for index, item in enumerate(tasks):
         if fix_time(time[0]) == item["time"]:
-            return f"Yes, You have {item['task']} at {time[0]}"
+            return f"You have {item['task']} at {time[0]}"
 
-    return f"No, you don't have anything at {time[0]}"
+    return f"You don't have anything scheduled at {time[0]}"
 
 
 def shift_task(raw):
     words = nltk.word_tokenize(raw)
     tagged = pos_tag(words)
-    time = None
-    task = None
+    time = ""
+    task = []
     for i, (word, pos) in enumerate(tagged):
         if pos == "NN":
-            if i + 1 < len(tagged):
-                task = [tagged[i + 1][0]]
-                time = None
-        elif task and pos == "CD":
+            pass
+        elif pos == "CD":
             time = word
+            break
+        elif word == "to" and i == len(tagged) - 2:
+            pass
+        else:
+            task.append(word)
     if task:
         task = " ".join(task)
 
@@ -145,7 +161,7 @@ def shift_task(raw):
             [task["task"] for task in tasks if task["time"] == fix_time(time)]
         )
         confirm = input(
-            f"Bot: You already have {existing_task} at {time}, are you sure you want to add {task}?\nYou: "
+            f"Zeitkonig: You already have {existing_task} at {time}, are you sure you want to add {task}?\nYou: "
         )
         if confirm in affirmations:
             for index, item in enumerate(tasks):
@@ -154,10 +170,12 @@ def shift_task(raw):
                     return f"Okay, {task} shifted to {item['time']}"
         else:
             confirmation = input(
-                f"Bot: Okay, do you want to add {task} at a different time?\nYou: "
+                f"Zeitkonig: Okay, do you want to add {task} at a different time?\nYou: "
             )
             if confirmation in affirmations:
-                time_input = input(f"Bot: What time would you like to add it?\nYou: ")
+                time_input = input(
+                    f"Zeitkonig: What time would you like to add it?\nYou: "
+                )
                 try:
                     for index, item in enumerate(tasks):
                         if task == item["task"]:
@@ -165,12 +183,27 @@ def shift_task(raw):
                             return f"Okay, {task} shifted to {item['time']}"
                 except:
                     return f"I'm sorry, that wasn't a valid input, try adding the task again."
+            else:
+                return f"Okay, try adding it again."
+    else:
+        for index, item in enumerate(tasks):
+            print(stem_sentence(task), stem_sentence(item["task"]))
+            if stem_sentence(task) == stem_sentence(item["task"]):
+                confirm = input(
+                    f"Zeitkonig: You want to shift {task} to {time}, is that correct?\nYou: "
+                )
+                if confirm.lower() in affirmations:
+                    item["time"] = fix_time(time)
+                    return f"{task} shifted to {item['time']}"
+            else:
+                pass
+        return f"That task is not in your day."
 
-    for index, item in enumerate(tasks):
-        if task == item["task"]:
-            confirm = input(
-                f"Bot: You want to shift {task} to {time}, is that correct?\nYou: "
-            )
-            if confirm.lower() in affirmations:
-                item["time"] = fix_time(time)
-                return f"{task} shifted to {item['time']}"
+
+def finish_task(raw):
+    task = input(
+        f"Zeitkonig: Which task do you want to remove?\n {', '.join(t['task'] for t in tasks)}\nYou: "
+    )
+    words = nltk.word_tokenize(raw)
+    tagged = pos_tag(words)
+    task = []

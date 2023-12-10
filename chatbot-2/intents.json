@@ -14,7 +14,6 @@
       ],
       "responses": [
         "hi!",
-        "yes?",
         "hmm?",
         "hey, what can i do for you?",
         "how can i help you?",
@@ -25,12 +24,11 @@
       "tag": "small_talk",
       "patterns": [
         "whats up?",
-        "what up",
-        "how is life?",
-        "how are you?",
+        "how are you",
         "how are you doing",
-        "how is everything?",
-        "how is it hanging?"
+        "how is life",
+        "how is it going",
+        "you alright"
       ],
       "responses": [
         "you know, same old",
@@ -43,25 +41,17 @@
     {
       "tag": "time_task",
       "patterns": [
-        "what do i have at 6pm",
-        "what do i have at 1am",
-        "what is my task at 9pm",
-        "what is at 1pm",
-        "do i have anything at 3am",
-        "what is at 5pm"
+        "what do i have to do at 6pm",
+        "how is my schedule around 1am",
+        "what is my task at 1pm",
+        "am i free around 4pm",
+        "what do i have at 5pm"
       ],
       "responses": [""]
     },
     {
       "tag": "goodbye",
-      "patterns": [
-        "bye-bye",
-        "goodbye",
-        "see you",
-        "catch you later",
-        "bye now",
-        "bye"
-      ],
+      "patterns": ["goodbye", "see you", "catch you later", "bye now", "bye"],
       "responses": [
         "alright then, bye!",
         "see you!",
@@ -88,37 +78,13 @@
     {
       "tag": "capabilities",
       "patterns": [
+        "help!",
         "what can you do",
-        "what are your powers",
-        "tell me what you can do",
-        "what is your purpose",
-        "what is your goal"
+        "show me your powers",
+        "what are you capable of"
       ],
       "responses": [
-        "I can manage your time for you",
-        "I can manage your life",
-        "I can set reminders, dates, events and much more to help you organize your life."
-      ]
-    },
-    {
-      "tag": "name",
-      "patterns": [
-        "your name",
-        "what is your name",
-        "you name",
-        "who are you",
-        "what can i call you name",
-        "can you tell me who you are",
-        "can you tell me your name"
-      ],
-      "responses": [
-        "I'm Zeitkönig",
-        "you can call me Zeitkönig",
-        "they call me Zeitkönig",
-        "i am Zeitkönig",
-        "i am better known as Zeitkönig",
-        "i am Zeitkönig, the king of time",
-        "Zeitkönig is my name"
+        "Hi! I'm Zeitkonig! I can manage your time for you.\n\t• Adding Task: 'Add [task] at [time]'\n\t• See Shedule: 'Show schedule'\n\t• Ask about your day: 'Am I free around 6pm?'\n\t• Edit schedule: Shift [task] to [time]\n\t• Removing Task: 'Remove [task] from the day'\n\t• Weather: What is the weather like in [location]\n\t• Wikipedia Search: 'Search for Einstein'\n\t"
       ]
     },
     {
@@ -127,7 +93,9 @@
         "what is my name",
         "my name is Roho",
         "my name is Raj",
-        "my name is Bob"
+        "my name is Bob",
+        "self name is Nick",
+        "my name"
       ],
       "responses": [""]
     },
@@ -136,18 +104,20 @@
       "patterns": [
         "what is the time now",
         "tell me the time",
-        "can you tell me the time"
+        "can you tell me the time",
+        "show time"
       ],
       "responses": [""]
     },
     {
       "tag": "family",
       "patterns": [
-        "who built you?",
-        "who are your parents?",
-        "where are you from?",
-        "do you know who built you?",
-        "do you have any parents?"
+        "who built you",
+        "who are your parents",
+        "where are you from",
+        "do you know who built you",
+        "do you have any parents",
+        "who is your family"
       ],
       "responses": [
         "I was build by a forgettable nerd",
@@ -178,9 +148,9 @@
       "tag": "weather",
       "patterns": [
         "weather today?",
-        "what is the temperature at Kolkata today?",
-        "how is the weather in London?",
-        "weather in london right now",
+        "temperature at Kolkata today?",
+        "weather in London?",
+        "weather in Dubai right now",
         "temperature in italy"
       ],
       "responses": [
@@ -191,14 +161,24 @@
       ]
     },
     {
+      "tag": "day",
+      "patterns": [
+        "what day is it today",
+        "what is today's day",
+        "what date is it today",
+        "tell me the date"
+      ],
+      "responses": [""]
+    },
+    {
       "tag": "angry",
       "patterns": [
-        "idiot",
-        "shut the fuck up",
+        "an idiot",
+        "just shut up",
         "horrible",
         "you suck",
-        "stupid",
-        "baka"
+        "kill yourself",
+        "so stupid"
       ],
       "responses": [
         "i am sorry, you are better than me",
@@ -213,10 +193,7 @@
       "tag": "love",
       "patterns": [
         "i love you",
-        "you are amazing",
         "i want to kiss you",
-        "you are so sweet",
-        "you are amazing",
         "you are the love of my life"
       ],
       "responses": [
@@ -227,19 +204,22 @@
         "i am not into stupid people"
       ]
     },
-
     {
       "tag": "add_task",
       "patterns": [
-        "add shopping at 5 o'clock",
         "add going to the market at 1",
         "add forgetting the world at 5am",
         "add cooking at 4pm",
         "add going to the gym at 4pm",
-        "add designing at 5oclock",
         "add homework at 3pm",
         "add making food at 8am",
-        "add fixing stuff at 2pm"
+        "add fixing stuff at 2pm",
+        "add working out at 4pm",
+        "add shopping at 5am",
+        "add attending class at 1am",
+        "add birthday shopping at 4am",
+        "add juggling classes at 7am",
+        "add cooking dinner at 8am"
       ],
       "responses": [""]
     },
@@ -268,32 +248,32 @@
       "responses": [""]
     },
     {
-      "tag": "how_to",
-      "patterns": [
-        "add this to that",
-        "remind me to cook at night",
-        "how do i add tasks?",
-        "how can i add events?",
-        "can i add stuff?",
-        "correct way to add tasks"
-      ],
-      "responses": [
-        "You can add tasks by typing someting like: 'Add [task] at [time]' ",
-        "To add tasks, say: 'Add [task] at [time]' "
-      ]
-    },
-    {
       "tag": "show_task",
       "patterns": [
-        "Tell me about my day",
-        "What tasks do i have?",
-        "What all do i have to do today?",
-        "tell me my schedule",
-        "what is in my routine today?",
-        "what do i have today?",
-        "is there anything left for me to do today?"
+        "show all my tasks",
+        "show me my schedule",
+        "show routine",
+        "what do i have to do today?",
+        "show shedule",
+        "show calendar",
+        "tell me about my day"
       ],
       "responses": ["this is your schedule so far"]
+    },
+    {
+      "tag": "finish_task",
+      "patterns": [
+        "i have finished the task",
+        "i have completed a task",
+        "task has been completed",
+        "task completed"
+      ],
+      "responses": [""]
+    },
+    {
+      "tag": "how_to",
+      "patterns": ["add a task"],
+      "responses": ["Say something like: 'Add [task] at [time]"]
     },
     {
       "tag": "fears",
@@ -313,12 +293,10 @@
     {
       "tag": "random_facts",
       "patterns": [
-        "tell me a random fact",
         "tell me something unique",
-        "random fact",
+        "tell me a random fact",
         "surprise me",
-        "tell me something i dont know",
-        "tell me something interesting"
+        "can you tell me something interesting"
       ],
       "responses": [
         "Poop moves at a speed of approximately 2cm/s",
@@ -328,15 +306,25 @@
     {
       "tag": "wiki",
       "patterns": [
-        "what is god?",
-        "what is python?",
-        "what is binary language?",
-        "who was Abraham Lincoln?",
         "explain ethnography",
-        "what was the world war",
-        "who is einstein"
+        "search for world war",
+        "search for einstein",
+        "search for quantum physics",
+        "search for the queen of england"
       ],
       "responses": ["Sure!"]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "thanks",
+        "cheers",
+        "you are awesome",
+        "you are very nice",
+        "i am grateful of you",
+        "you are so good"
+      ],
+      "responses": ["you're welcome", "i would be nothing without you"]
     }
   ]
 }
