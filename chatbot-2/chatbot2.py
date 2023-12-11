@@ -24,7 +24,6 @@ from get_time import get_time, get_day
 lemmatizer = WordNetLemmatizer()
 
 
-df = pd.read_csv("chatbot-2/dataset2.csv")
 vocab = json.loads(open("chatbot-2/intents.json").read())
 intents = json.loads(open("chatbot-2/intents.json").read())
 
@@ -57,7 +56,7 @@ y_train = [intent["tag"] for intent in intents["intents"] for _ in intent["patte
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
-    X_train, y_train, test_size=0.20, random_state=50
+    X_train, y_train, test_size=0.25, random_state=50
 )
 
 classifiers = {
@@ -83,14 +82,14 @@ for name, classifier in classifiers.items():
         best_classifier = classifier
 print("best_classifier", best_classifier)
 
-# Create and train the pipeline
+# Creating and training the pipeline
 model = make_pipeline(TfidfVectorizer(), best_classifier)
 model.fit(X_train, y_train)
 
-# Predict on the test set
+# Prediction on the test set
 y_pred = model.predict(X_test)
 
-# Evaluate the classifier
+# Evaluation the classifier
 print("Accuracy:", accuracy_score(y_test, y_pred))
 print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 print(

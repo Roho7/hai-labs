@@ -81,7 +81,8 @@
         "help!",
         "what can you do",
         "show me your powers",
-        "what are you capable of"
+        "what are you capable of",
+        "tell me what can you do"
       ],
       "responses": [
         "Hi! I'm Zeitkonig! I can manage your time for you.\n\t• Adding Task: 'Add [task] at [time]'\n\t• See Shedule: 'Show schedule'\n\t• Ask about your day: 'Am I free around 6pm?'\n\t• Edit schedule: Shift [task] to [time]\n\t• Removing Task: 'Remove [task] from the day'\n\t• Weather: What is the weather like in [location]\n\t• Wikipedia Search: 'Search for Einstein'\n\t"
@@ -299,8 +300,11 @@
         "can you tell me something interesting"
       ],
       "responses": [
-        "Poop moves at a speed of approximately 2cm/s",
-        "Everyday the moon moves away from earth by 0.01mm"
+        "The Spanish national anthem has no words. The 'Marcha Real' is one of only four national anthems in the world (along with those of Bosnia and Herzegovina, Kosovo, and San Marino) to have no official lyrics.",
+        "Everyday the moon moves away from earth by 0.01mm",
+        "The probability of a blue lobster existing is widely touted as being one in two million. Bright blue lobsters are so-coloured because of a genetic abnormality that causes them to produce more of a certain protein than others.",
+        "M&Ms are named after the businessmen who created them. But what do the M's stand for? Forrest Mars and Bruce Murrie, who apparently didn't have the best relationship as Mars leveraged Murrie out of his 20% share of the business before it became the biggest-selling sweet in the US. Ouch.",
+        "The real name for a hashtag is an octothorpe. The 'octo' refers to the eight points in the symbol, but according to the Merriam-Webster dictionary the 'thorpe' part is a mystery."
       ]
     },
     {

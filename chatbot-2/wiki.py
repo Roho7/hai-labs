@@ -16,6 +16,7 @@ def get_wiki(sentence):
         "where",
         "when",
         "how",
+        "search",
     ]:
         try:
             if "is" in clean_sent:

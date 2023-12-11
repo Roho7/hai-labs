@@ -187,7 +187,6 @@ def shift_task(raw):
                 return f"Okay, try adding it again."
     else:
         for index, item in enumerate(tasks):
-            print(stem_sentence(task), stem_sentence(item["task"]))
             if stem_sentence(task) == stem_sentence(item["task"]):
                 confirm = input(
                     f"Zeitkonig: You want to shift {task} to {time}, is that correct?\nYou: "
