@@ -1,3 +1,10 @@
+import subprocess
+
+# DOWNLOADS WEATHER API AND WIKIPEDIA API PACKAGES
+package_name = ["pyowm", "wikipedia-api"]
+for package in package_name:
+    subprocess.run(["pip", "insall", package])
+
 import pandas as pd
 import numpy as np
 import string
@@ -21,10 +28,17 @@ from name import get_username
 from wiki import get_wiki
 from get_time import get_time, get_day
 
+# REMOVE AFTER FIRST RUN
+nltk.download("stopwords")
+nltk.download("punkt")
+nltk.download("wordnet")
+nltk.download("omw-1.4")
+nltk.download("averaged_perceptron_tagger")
+nltk.download("maxent_ne_chunker")
+nltk.download("words")
+
 lemmatizer = WordNetLemmatizer()
 
-
-vocab = json.loads(open("chatbot-2/intents.json").read())
 intents = json.loads(open("chatbot-2/intents.json").read())
 
 stop_words = set(stopwords.words("english"))
@@ -32,9 +46,8 @@ stemmer = PorterStemmer()
 
 
 #  ============== PRE-PROCESSING ============
-def preprocess_text(text):
+def text_preprocess(text):
     tokens = nltk.word_tokenize(str(text).lower())
-    # tokens = [stemmer.stem(token) for token in tokens]
     tokens = [
         lemmatizer.lemmatize(token)
         for token in tokens
@@ -48,13 +61,13 @@ def preprocess_text(text):
 
 # ============== USE CLASSIFIER ===============
 X_train = [
-    preprocess_text(pattern)
+    text_preprocess(pattern)
     for intent in intents["intents"]
     for pattern in intent["patterns"]
 ]
 y_train = [intent["tag"] for intent in intents["intents"] for _ in intent["patterns"]]
 
-# Split the data into training and testing sets
+# Splitting the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
     X_train, y_train, test_size=0.25, random_state=50
 )
@@ -65,7 +78,7 @@ classifiers = {
     "Random Forest": RandomForestClassifier(),
 }
 
-kfold = StratifiedKFold(n_splits=7, shuffle=True, random_state=50)
+kfold = StratifiedKFold(n_splits=5, shuffle=True, random_state=50)
 
 max_score = float("-inf")
 best_classifier = None
@@ -89,24 +102,43 @@ model.fit(X_train, y_train)
 # Prediction on the test set
 y_pred = model.predict(X_test)
 
-# Evaluation the classifier
+# Evaluation
 print("Accuracy:", accuracy_score(y_test, y_pred))
 print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 print(
     "Classification Report:\n", classification_report(y_test, y_pred, zero_division=1)
 )
 
+# ======= COSINE SIMILIARITY ========
+df = pd.read_csv("chatbot-2/dataset3.csv")
+
+
+def get_cosine_response(input):
+    df["processed_question"] = df["Question"].apply(text_preprocess)
+    vectorizer = TfidfVectorizer()
+    question_vectors = vectorizer.fit_transform(df["processed_question"])
+    user_vector = vectorizer.transform([text_preprocess(user_input)])
+    cosine_scores = cosine_similarity(user_vector, question_vectors).flatten()
+    max_similarity_index = cosine_scores.argmax()
+    return df.loc[max_similarity_index, "Answer"]
+
 
 # ===== GENERATE RESPONSE =====
 def get_response(sentence, raw):
     predicted_intent = model.predict([pre_processed])[0]
+    confidence_scores = model.predict_proba([pre_processed])[0]
+    confidence_for_predicted_intent = confidence_scores[
+        model.classes_.tolist().index(predicted_intent)
+    ]
+    print(confidence_for_predicted_intent)
+    if confidence_for_predicted_intent <= 0.5:
+        return None
     intent_responses = {
         intent["tag"]: intent["responses"] for intent in intents["intents"]
     }
     if predicted_intent in intent_responses:
         responses = intent_responses[predicted_intent]
         response = random.choice(responses)
-        # print(predicted_intent)
         if predicted_intent == "add_task":
             result = add_task(raw)
             return result
@@ -149,10 +181,11 @@ print(
 )
 while True:
     user_input = input("You: ")
-    pre_processed = preprocess_text(user_input)
+    pre_processed = text_preprocess(user_input)
     response = get_response(pre_processed, user_input)
     if response != None:
         response = response
     else:
-        response = "I do not know how to respond to that. Could you come again?"
+        response = get_cosine_response(user_input)
+        # response = "I do not know how to respond to that. Could you come again?"
     print(f"Zeitkonig:", response)
