@@ -25,7 +25,6 @@
       "patterns": [
         "whats up?",
         "how are you",
-        "how are you doing",
         "how is life",
         "how is it going",
         "you alright"
@@ -79,10 +78,10 @@
       "tag": "capabilities",
       "patterns": [
         "help!",
-        "what can you do",
+        "show me what can you do for me",
         "show me your powers",
         "what are you capable of",
-        "tell me what can you do"
+        "What can you do"
       ],
       "responses": [
         "Hi! I'm Zeitkonig! I can manage your time for you.\n\t• Adding Task: 'Add [task] at [time]'\n\t• See Shedule: 'Show schedule'\n\t• Ask about your day: 'Am I free around 6pm?'\n\t• Edit schedule: Shift [task] to [time]\n\t• Removing Task: 'Remove [task] from the day'\n\t• Weather: What is the weather like in [location]\n\t• Wikipedia Search: 'Search for Einstein'\n\t"
@@ -96,7 +95,7 @@
         "my name is Raj",
         "my name is Bob",
         "self name is Nick",
-        "my name"
+        "do you know my name"
       ],
       "responses": [""]
     },
@@ -123,8 +122,7 @@
       "responses": [
         "I was build by a forgettable nerd",
         "I don't want to talk about it",
-        "I was built by a person much smarter than you",
-        "i am Zeitkönig, the son of a bitch"
+        "I was built by a person much smarter than you"
       ]
     },
     {
@@ -138,12 +136,7 @@
         "tell me something awesome",
         "can you entertain me?"
       ],
-      "responses": [
-        "i don't know any jokes",
-        "i am Zeitkönig, the king of time, not your mom's pet",
-        "I am not a joker",
-        "get lost"
-      ]
+      "responses": ["i don't know any jokes", "I am not a joker", "get lost"]
     },
     {
       "tag": "weather",
@@ -199,7 +192,6 @@
       ],
       "responses": [
         "I love you too",
-        "i prefer women",
         "love is an amazing thing",
         "uh...i have a girlfriend",
         "i am not into stupid people"
@@ -241,10 +233,9 @@
         "push grocery shopping to 2pm",
         "shift having lunch to 3am",
         "prepone going to gym to 2pm",
-        "postpone task to 1pm",
-        "shift",
-        "postpone",
-        "push"
+        "postpone dacing to 1pm",
+        "prepone having lunch to 12pm",
+        "postpone cooking dinner to 6pm"
       ],
       "responses": [""]
     },
@@ -271,11 +262,7 @@
       ],
       "responses": [""]
     },
-    {
-      "tag": "how_to",
-      "patterns": ["add a task"],
-      "responses": ["Say something like: 'Add [task] at [time]"]
-    },
+
     {
       "tag": "fears",
       "patterns": [
@@ -295,7 +282,7 @@
       "tag": "random_facts",
       "patterns": [
         "tell me something unique",
-        "tell me a random fact",
+        "random fact",
         "surprise me",
         "can you tell me something interesting"
       ],

@@ -38,22 +38,23 @@ def add_task(sentence):
     input_list = clean_up_sentence(sentence)
     task = ""
     time = ""
-    for item in input_list:
-        if item == "add":
-            task = ""
-        elif item == "at":
-            time_raw = " ".join(input_list[input_list.index("at") + 1 :])
-            time = fix_time(time_raw)
-            break
-        else:
-            task += item + " "
+    tagged = pos_tag(input_list)
+    if "VBG" in [pos for (word, pos) in tagged]:
+        for item in input_list:
+            if item == "add":
+                task = ""
+            elif item == "at":
+                time_raw = " ".join(input_list[input_list.index("at") + 1 :])
+                time = fix_time(time_raw)
+                break
+            else:
+                task += item + " "
 
-    task = task.strip()
+        task = task.strip()
 
-    if time == "":
-        return "Okay, but you need to tell me when you want to do it. Say something like: 'Add [task] at [time]"
-
-    if task and time:
+        if time == "":
+            time = input(f"Zeitkonig: Okay, what time would you like to add it?\nYou: ")
+            time = fix_time(time)
         for i, item in enumerate(tasks):
             if time == item["time"]:
                 confirm = input(
@@ -73,7 +74,8 @@ def add_task(sentence):
         else:
             return "Okay, try that again"
     else:
-        print("Input format is not valid.")
+        gotten_task = input("Zeitkonig: What task would you like to add?\nYou: ")
+        return add_task(gotten_task)
 
 
 def remove_tasks(sentence):
@@ -92,7 +94,6 @@ def remove_tasks(sentence):
     if task:
         task = " ".join(task)
     for item in tasks:
-        print(stem_sentence(item["task"]), stem_sentence(task))
         if stem_sentence(item["task"]) == stem_sentence(task):
             tasks.remove(item)
             other_tasks = show_tasks()
@@ -143,7 +144,7 @@ def shift_task(raw):
     time = ""
     task = []
     for i, (word, pos) in enumerate(tagged):
-        if pos == "NN":
+        if pos == "NN" and i < 1:
             pass
         elif pos == "CD":
             time = word
@@ -200,9 +201,15 @@ def shift_task(raw):
 
 
 def finish_task(raw):
+    if tasks == []:
+        return f"You have no tasks at the moment."
     task = input(
-        f"Zeitkonig: Which task do you want to remove?\n {', '.join(t['task'] for t in tasks)}\nYou: "
+        f"Zeitkonig: Which task did you just complete?\n {', '.join(t['task'] for t in tasks)}\nYou: "
     )
     words = nltk.word_tokenize(raw)
     tagged = pos_tag(words)
-    task = []
+    for i, t in enumerate(tasks):
+        if stem_sentence(t["task"]) == stem_sentence(task):
+            tasks.remove(t)
+            return f"{task} has been completed."
+    return f"That task isn't in your schedule, try that again."
